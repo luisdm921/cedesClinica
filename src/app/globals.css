@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f2ec;
+  --foreground: #4b433c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Verde petróleo — Confianza, profesionalismo y exclusividad */
+  --color-petroleum: #1f4d46;
+  --color-petroleum-light: #2a6960;
+  --color-petroleum-dark: #163a35;
+
+  /* Beige arena — Calidez, armonía y rejuvenecimiento */
+  --color-sand: #c9b19a;
+  --color-sand-light: #d9c9b5;
+  --color-sand-dark: #b89a7f;
+
+  /* Marfil cálido — Limpieza, calma y sofisticación */
+  --color-ivory: #f6f2ec;
+  --color-ivory-light: #fdfcfa;
+  --color-ivory-dark: #ebe5db;
+
+  /* Dorado champagne — Lujo, distinción y detalles premium */
+  --color-champagne: #c8a26e;
+  --color-champagne-light: #d4b68a;
+  --color-champagne-dark: #b08c55;
+
+  /* Taupe profundo — Elegancia, legibilidad y profesionalismo */
+  --color-taupe: #4b433c;
+  --color-taupe-light: #6b6158;
+  --color-taupe-dark: #342e29;
+
+  /* Verde salvia — Naturalidad, armonía y bienestar */
+  --color-sage: #a8b2a2;
+  --color-sage-light: #c0c8bb;
+  --color-sage-dark: #8f9a88;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), serif;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
 }
