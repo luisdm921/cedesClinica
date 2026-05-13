@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
 
 const tabs = [
   "Especialidades Dentales",
@@ -46,11 +45,9 @@ export default function SlideSwitch() {
 
   return (
     <section className="bg-white px-6 py-24 md:px-12 lg:px-24">
-      <Image
+      <img
         src="/images/hero/LogoIndivudalTitulo.png"
         alt="Cedes Clínica"
-        width={1136}
-        height={350}
         className="mx-auto -mb-3 h-auto w-56 object-contain md:w-72"
       />
       <h2 className="mb-12 text-center text-[clamp(2.5rem,5vw,4rem)] font-bold text-black">
@@ -77,11 +74,9 @@ export default function SlideSwitch() {
                 : "text-taupe-light hover:text-champagne-dark"
             }`}
           >
-            <Image
+            <img
               src="/images/hero/logoIndividual.png"
               alt=""
-              width={318}
-              height={209}
               className={`h-8 w-12 object-contain transition-all duration-300 ${
                 active === tab
                   ? "brightness-0 invert"
@@ -276,11 +271,9 @@ function ServiceCard({
           className={`absolute inset-0 flex flex-col items-center justify-center rounded-2xl ${color} p-6 shadow-sm [backface-visibility:hidden]`}
         >
           {image && (
-            <Image
+            <img
               src={image}
               alt={title}
-              width={80}
-              height={80}
               className="mb-3 h-16 w-16 object-contain"
             />
           )}

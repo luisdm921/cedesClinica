@@ -1,20 +1,18 @@
-import Image from "next/image";
-
 export default function Hero() {
   return (
-    <section className="flex min-h-screen flex-col overflow-hidden bg-ivory pt-[150px] md:flex-row max-md:pt-[100px]">
+    <section className="flex min-h-screen flex-col overflow-hidden bg-ivory pt-37.5 md:flex-row max-md:pt-25">
       {/* Lado izquierdo — Contenido */}
       <div className="relative z-10 flex flex-col items-center justify-center px-6 py-10 text-center md:flex-[0_1_40%] md:items-start md:px-12 md:py-12 md:text-left lg:px-24">
-        <h1 className="mb-5 flex w-full flex-col font-heading text-[clamp(2.8rem,5.5vw,4.5rem)] font-semibold leading-[1.1]">
-          <span className="block w-full whitespace-nowrap text-petroleum">
+        <h1 className="mb-5 flex w-full max-w-[12ch] flex-col font-heading text-[clamp(2.3rem,10vw,4.5rem)] font-semibold leading-[0.95] md:max-w-none md:text-[clamp(2.8rem,5.5vw,4.5rem)] md:leading-[1.1]">
+          <span className="block w-full text-petroleum md:whitespace-nowrap">
             Cuidamos tu sonrisa
           </span>
-          <span className="block w-full whitespace-nowrap text-champagne">
+          <span className="block w-full text-champagne md:whitespace-nowrap">
             Realzamos tu belleza
           </span>
         </h1>
 
-        <p className="mb-10 max-w-[450px] text-[clamp(1.1rem,2vw,1.4rem)] leading-relaxed text-taupe-light">
+        <p className="mb-10 max-w-112.5 text-[clamp(1rem,4.5vw,1.4rem)] leading-relaxed text-taupe-light md:text-[clamp(1.1rem,2vw,1.4rem)]">
           Tu sonrisa perfecta está a un paso. Cuidamos tu salud dental con
           tecnología y calidez.
         </p>
@@ -33,18 +31,16 @@ export default function Hero() {
       </div>
 
       {/* Lado derecho — Imagen */}
-      <div className="relative flex min-h-[220px] flex-[1_1_60%] items-end justify-center md:min-h-[calc(100vh-150px)]">
+      <div className="relative flex min-h-55 flex-[1_1_60%] items-end justify-center md:min-h-[calc(100vh-150px)]">
         {/* <span
           className="absolute h-3/4 w-3/4 bg-petroleum"
           style={{ borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%" }}
           aria-hidden="true"
         /> */}
-        <Image
+        <img
           src="/images/hero/hero.png"
           alt="Dentista sonriendo en la clínica dental"
-          fill
-          className="object-cover object-top"
-          priority
+          className="absolute inset-0 h-full w-full object-cover object-top"
         />
       </div>
     </section>
