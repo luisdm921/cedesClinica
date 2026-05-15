@@ -530,7 +530,7 @@ export default function BeforeAfterCarousel() {
 
               <button
                 onClick={() => swiperRef.current?.slidePrev()}
-                className="absolute top-1/2 -left-8 z-20 -translate-y-1/2 p-1 text-black transition-colors hover:text-black md:hidden"
+                className="absolute top-1/2 -left-8 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-black transition-colors hover:text-black md:hidden"
                 aria-label="Anterior"
               >
                 <svg
@@ -550,7 +550,7 @@ export default function BeforeAfterCarousel() {
 
               <button
                 onClick={() => swiperRef.current?.slideNext()}
-                className="absolute top-1/2 -right-8 z-20 -translate-y-1/2 p-1 text-black transition-colors hover:text-black md:hidden"
+                className="absolute top-1/2 -right-8 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-black transition-colors hover:text-black md:hidden"
                 aria-label="Siguiente"
               >
                 <svg
