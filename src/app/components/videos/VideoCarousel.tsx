@@ -228,21 +228,18 @@ export default function VideoCarousel() {
               />
             </svg>
           </button>
-        </div>
 
-        {/* Mobile controls */}
-        <div className="mt-4 flex items-center justify-center gap-4 md:hidden">
           <button
             onClick={() => swiperRef.current?.slidePrev()}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-petroleum text-white transition-colors hover:bg-petroleum-light"
+            className="absolute top-1/2 -left-8 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-black transition-colors hover:text-black md:hidden"
             aria-label="Anterior"
           >
             <svg
-              className="h-4 w-4"
+              className="h-7 w-7"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2.5}
+              strokeWidth={2.25}
             >
               <path
                 strokeLinecap="round"
@@ -251,17 +248,18 @@ export default function VideoCarousel() {
               />
             </svg>
           </button>
+
           <button
             onClick={() => swiperRef.current?.slideNext()}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-petroleum text-white transition-colors hover:bg-petroleum-light"
+            className="absolute top-1/2 -right-8 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-black transition-colors hover:text-black md:hidden"
             aria-label="Siguiente"
           >
             <svg
-              className="h-4 w-4"
+              className="h-7 w-7"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2.5}
+              strokeWidth={2.25}
             >
               <path
                 strokeLinecap="round"
