@@ -42,9 +42,7 @@ export default function Footer() {
           </a>
         </div>
 
-        <p className="text-sm text-ivory/50">
-          @cedesclinica · Dra. Consuelo Chapa
-        </p>
+        <p className="text-sm text-ivory/50">cedes1828@gmail.com</p>
 
         <div className="h-px w-full max-w-xs bg-ivory/10" />
 

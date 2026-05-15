@@ -65,7 +65,6 @@ export default function VideoCarousel() {
         </div>
 
         <div className="relative flex items-center gap-3">
-          {/* Prev */}
           <button
             onClick={() => swiperRef.current?.slidePrev()}
             className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full bg-petroleum text-white transition-colors hover:bg-petroleum-light md:flex"
@@ -90,9 +89,10 @@ export default function VideoCarousel() {
             <Swiper
               modules={[]}
               allowTouchMove
+              grabCursor
               loop={totalSlides > 1}
-              onSwiper={(s) => {
-                swiperRef.current = s;
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
               }}
               onSlideChange={() => {
                 // Pause all videos on slide change
@@ -208,7 +208,6 @@ export default function VideoCarousel() {
             </Swiper>
           </div>
 
-          {/* Next */}
           <button
             onClick={() => swiperRef.current?.slideNext()}
             className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full bg-petroleum text-white transition-colors hover:bg-petroleum-light md:flex"
@@ -220,46 +219,6 @@ export default function VideoCarousel() {
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute top-1/2 -left-8 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-black transition-colors hover:text-black md:hidden"
-            aria-label="Anterior"
-          >
-            <svg
-              className="h-7 w-7"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.25}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            className="absolute top-1/2 -right-8 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-black transition-colors hover:text-black md:hidden"
-            aria-label="Siguiente"
-          >
-            <svg
-              className="h-7 w-7"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.25}
             >
               <path
                 strokeLinecap="round"

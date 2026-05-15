@@ -176,6 +176,33 @@ export default function BeforeAfterCarousel() {
   const swiperRef = useRef<SwiperType | null>(null);
   const mobileTabsRef = useRef<HTMLDivElement>(null);
 
+  const isCompareHandleTarget = (target: EventTarget | null): target is Element => {
+    if (!(target instanceof Element)) return false;
+
+    return Boolean(
+      target.closest(
+        '[data-rcs="handle"], .__rcs-handle-root, .__rcs-handle-button, .__rcs-handle-line',
+      ),
+    );
+  };
+
+  const handleComparePointerDownCapture = (
+    event: React.PointerEvent<HTMLDivElement>,
+  ) => {
+    if (!isMobileViewport) return;
+    if (!isCompareHandleTarget(event.target)) return;
+
+    if (swiperRef.current) {
+      swiperRef.current.allowTouchMove = false;
+    }
+  };
+
+  const handleComparePointerUpCapture = () => {
+    if (swiperRef.current) {
+      swiperRef.current.allowTouchMove = isMobileViewport;
+    }
+  };
+
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
     setIsMobileViewport(isMobile);
@@ -239,6 +266,31 @@ export default function BeforeAfterCarousel() {
       btn.offsetLeft - container.offsetWidth / 2 + btn.offsetWidth / 2;
     container.scrollTo({ left: targetLeft, behavior: "smooth" });
   }, [activeFilter, isMobileViewport]);
+
+  useEffect(() => {
+    const unlockSwipe = () => {
+      if (swiperRef.current) {
+        swiperRef.current.allowTouchMove = isMobileViewport;
+      }
+    };
+
+    window.addEventListener("pointerup", unlockSwipe);
+    window.addEventListener("pointercancel", unlockSwipe);
+    window.addEventListener("touchend", unlockSwipe);
+    window.addEventListener("mouseup", unlockSwipe);
+
+    return () => {
+      window.removeEventListener("pointerup", unlockSwipe);
+      window.removeEventListener("pointercancel", unlockSwipe);
+      window.removeEventListener("touchend", unlockSwipe);
+      window.removeEventListener("mouseup", unlockSwipe);
+    };
+  }, [isMobileViewport]);
+
+  useEffect(() => {
+    if (!swiperRef.current) return;
+    swiperRef.current.allowTouchMove = isMobileViewport;
+  }, [isMobileViewport]);
 
   const filtered = activeFilter
     ? cases.filter((c) => c.category === activeFilter)
@@ -329,12 +381,14 @@ export default function BeforeAfterCarousel() {
                 <Swiper
                   key={activeFilter || "all"}
                   modules={[]}
-                  allowTouchMove={false}
-                  simulateTouch={false}
+                  allowTouchMove={isMobileViewport}
+                  simulateTouch={isMobileViewport}
+                  grabCursor
                   touchStartPreventDefault={false}
                   loop={filtered.length > 1}
                   onSwiper={(swiper) => {
                     swiperRef.current = swiper;
+                    swiper.allowTouchMove = isMobileViewport;
                   }}
                   className="before-after-swiper"
                 >
@@ -363,57 +417,61 @@ export default function BeforeAfterCarousel() {
 
                             <div
                               className="relative overflow-hidden rounded-2xl bg-ivory-dark"
-                              onPointerDown={(e) => e.stopPropagation()}
-                              onTouchStart={(e) => e.stopPropagation()}
-                              onMouseDown={(e) => e.stopPropagation()}
                             >
                               <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-2 bg-linear-to-b from-white/10 to-transparent" />
                               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-2 bg-linear-to-t from-white/10 to-transparent" />
 
                               {item.variant === "compare" ? (
-                                <ReactCompareSlider
-                                  itemOne={
-                                    <ReactCompareSliderImage
-                                      src={item.before}
-                                      alt={`${item.label} — Antes`}
-                                      style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        objectFit,
-                                        objectPosition:
-                                          mobileCalibration.beforePosition ||
-                                          defaultPosition,
-                                        transform: `scale(${mobileCalibration.beforeScale || 1})`,
-                                        transformOrigin: "center",
-                                      }}
-                                    />
-                                  }
-                                  itemTwo={
-                                    <ReactCompareSliderImage
-                                      src={item.after}
-                                      alt={`${item.label} — Después`}
-                                      style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        objectFit,
-                                        objectPosition:
-                                          mobileCalibration.afterPosition ||
-                                          defaultPosition,
-                                        transform: `scale(${mobileCalibration.afterScale || 1})`,
-                                        transformOrigin: "center",
-                                      }}
-                                    />
-                                  }
-                                  style={{
-                                    width: "100%",
-                                    height:
-                                      item.aspect === "portrait"
-                                        ? "460px"
-                                        : "360px",
-                                    position: "relative",
-                                    zIndex: 1,
-                                  }}
-                                />
+                                <div
+                                  onPointerDownCapture={handleComparePointerDownCapture}
+                                  onPointerUpCapture={handleComparePointerUpCapture}
+                                  onPointerCancelCapture={handleComparePointerUpCapture}
+                                >
+                                  <ReactCompareSlider
+                                    onlyHandleDraggable
+                                    itemOne={
+                                      <ReactCompareSliderImage
+                                        src={item.before}
+                                        alt={`${item.label} — Antes`}
+                                        style={{
+                                          width: "100%",
+                                          height: "100%",
+                                          objectFit,
+                                          objectPosition:
+                                            mobileCalibration.beforePosition ||
+                                            defaultPosition,
+                                          transform: `scale(${mobileCalibration.beforeScale || 1})`,
+                                          transformOrigin: "center",
+                                        }}
+                                      />
+                                    }
+                                    itemTwo={
+                                      <ReactCompareSliderImage
+                                        src={item.after}
+                                        alt={`${item.label} — Después`}
+                                        style={{
+                                          width: "100%",
+                                          height: "100%",
+                                          objectFit,
+                                          objectPosition:
+                                            mobileCalibration.afterPosition ||
+                                            defaultPosition,
+                                          transform: `scale(${mobileCalibration.afterScale || 1})`,
+                                          transformOrigin: "center",
+                                        }}
+                                      />
+                                    }
+                                    style={{
+                                      width: "100%",
+                                      height:
+                                        item.aspect === "portrait"
+                                          ? "460px"
+                                          : "360px",
+                                      position: "relative",
+                                      zIndex: 1,
+                                    }}
+                                  />
+                                </div>
                               ) : (
                                 <div
                                   className="relative flex items-center justify-center"
@@ -519,46 +577,6 @@ export default function BeforeAfterCarousel() {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-
-              <button
-                onClick={() => swiperRef.current?.slidePrev()}
-                className="absolute top-1/2 -left-8 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-black transition-colors hover:text-black md:hidden"
-                aria-label="Anterior"
-              >
-                <svg
-                  className="h-7 w-7"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.25}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-
-              <button
-                onClick={() => swiperRef.current?.slideNext()}
-                className="absolute top-1/2 -right-8 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-black transition-colors hover:text-black md:hidden"
-                aria-label="Siguiente"
-              >
-                <svg
-                  className="h-7 w-7"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.25}
                 >
                   <path
                     strokeLinecap="round"
