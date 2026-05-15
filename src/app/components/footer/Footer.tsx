@@ -18,7 +18,7 @@ export default function Footer() {
           </a>
           {/* Facebook */}
           <a
-            href="https://www.facebook.com/cedesclinica"
+            href="https://www.facebook.com/share/1Py2tsFh44/?mibextid=wwXIfr"
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-11 w-11 items-center justify-center rounded-full bg-ivory/10 text-ivory transition-colors hover:bg-champagne/30 hover:text-champagne"
@@ -30,7 +30,7 @@ export default function Footer() {
           </a>
           {/* TikTok */}
           <a
-            href="https://www.tiktok.com/@cedesclinica"
+            href="https://www.tiktok.com/@dra.consuelochapa?_r=1&_t=ZS-96N6Kbr4O0Y"
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-11 w-11 items-center justify-center rounded-full bg-ivory/10 text-ivory transition-colors hover:bg-champagne/30 hover:text-champagne"

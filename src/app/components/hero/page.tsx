@@ -18,7 +18,7 @@ export default function Hero() {
         </p>
 
         <a
-          href="https://wa.me/5215512345678?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita"
+          href="https://wa.me/528114110318?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2.5 rounded-full bg-champagne px-8 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-champagne-dark"
@@ -38,7 +38,7 @@ export default function Hero() {
           aria-hidden="true"
         /> */}
         <img
-          src="/images/hero/hero.png"
+          src="/images/hero/hero.webp"
           alt="Dentista sonriendo en la clínica dental"
           className="absolute inset-0 h-full w-full object-cover object-top"
         />

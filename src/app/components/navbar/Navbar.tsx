@@ -15,12 +15,12 @@ export default function Navbar() {
   const closeMenu = () => setOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[1000] flex h-[150px] items-center justify-between bg-ivory/95 px-12 shadow-[0_2px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl max-md:h-[100px] max-md:px-6">
+    <header className="fixed inset-x-0 top-0 z-1000 flex h-37.5 items-center justify-between bg-ivory/95 px-12 shadow-[0_2px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl max-md:h-25 max-md:px-6">
       {/* Logo */}
       <Link href="/" className="flex items-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/hero/mainLogo.png"
+          src="/images/hero/mainLogo.webp"
           alt="Logo Clínica Dental"
           className="h-44 w-auto max-md:h-28"
         />
@@ -28,23 +28,23 @@ export default function Navbar() {
 
       {/* Hamburger — solo móvil */}
       <button
-        className="z-[1300] hidden flex-col justify-center gap-[5px] border-none bg-transparent p-1 max-md:flex"
+        className="z-1300 hidden flex-col justify-center gap-1.25 border-none bg-transparent p-1 max-md:flex"
         aria-label={open ? "Cerrar menú" : "Abrir menú"}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
         <span
-          className={`block h-[3px] w-[26px] rounded bg-petroleum transition-all duration-300 ${
+          className={`block h-0.75 w-6.5 rounded bg-petroleum transition-all duration-300 ${
             open ? "translate-y-2 rotate-45" : ""
           }`}
         />
         <span
-          className={`block h-[3px] w-[26px] rounded bg-petroleum transition-all duration-300 ${
+          className={`block h-0.75 w-6.5 rounded bg-petroleum transition-all duration-300 ${
             open ? "opacity-0" : ""
           }`}
         />
         <span
-          className={`block h-[3px] w-[26px] rounded bg-petroleum transition-all duration-300 ${
+          className={`block h-0.75 w-6.5 rounded bg-petroleum transition-all duration-300 ${
             open ? "-translate-y-2 -rotate-45" : ""
           }`}
         />
@@ -53,14 +53,14 @@ export default function Navbar() {
       {/* Overlay móvil */}
       {open && (
         <div
-          className="fixed inset-0 z-[1100] bg-black/40 md:hidden"
+          className="fixed inset-0 z-1100 bg-black/40 md:hidden"
           onClick={closeMenu}
         />
       )}
 
       {/* Nav */}
       <nav
-        className={`flex items-center gap-10 max-md:fixed max-md:top-0 max-md:left-0 max-md:z-[1200] max-md:h-screen max-md:w-screen max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-10 max-md:bg-ivory max-md:p-8 max-md:transition-transform max-md:duration-300 ${
+        className={`flex items-center gap-10 max-md:fixed max-md:top-0 max-md:left-0 max-md:z-1200 max-md:h-screen max-md:w-screen max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-10 max-md:bg-ivory max-md:p-8 max-md:transition-transform max-md:duration-300 ${
           open ? "max-md:translate-x-0" : "max-md:translate-x-full"
         }`}
       >
@@ -68,7 +68,7 @@ export default function Navbar() {
         <span className="mb-4 hidden max-md:block">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/hero/mainLogo.png"
+            src="/images/hero/mainLogo.webp"
             alt="Logo Cedes Clínica"
             className="h-44 w-auto"
           />
@@ -89,7 +89,7 @@ export default function Navbar() {
         </ul>
 
         <a
-          href="https://wa.me/5215512345678?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita"
+          href="https://wa.me/528114110318?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita"
           target="_blank"
           rel="noopener noreferrer"
           onClick={closeMenu}

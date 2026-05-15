@@ -132,7 +132,7 @@ export default function Contact() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3596.0!2d-100.316!3d25.669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662bfe1e7b3e5f5%3A0x0!2sAramberri%201828%20Pte%2C%20Centro%2C%2064000%20Monterrey%2C%20N.L.!5e0!3m2!1ses!2smx!4v1"
               width="100%"
               height="100%"
-              className="min-h-[400px] border-0"
+              className="min-h-100 border-0"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

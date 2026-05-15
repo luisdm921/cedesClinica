@@ -72,7 +72,7 @@ export default function RelaxCedes() {
 
             {/* CTA */}
             <a
-              href="https://wa.me/5215512345678?text=Hola%2C%20me%20interesa%20el%20paquete%20Relax%20CEDES"
+              href="https://wa.me/528114110318?text=Hola%2C%20me%20interesa%20el%20paquete%20Relax%20CEDES"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-fit self-center items-center gap-2.5 rounded-full bg-petroleum px-8 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-petroleum-light md:self-start"
@@ -87,7 +87,7 @@ export default function RelaxCedes() {
           {/* Lado derecho — Visual */}
           <div className="relative min-h-75 md:flex-1">
             <img
-              src="/images/services/CedexRelax.jpeg"
+              src="/images/services/CedexRelax.webp"
               alt="Relax CEDES — Tratamiento de bienestar facial"
               className="absolute inset-0 h-full w-full object-cover"
             />
