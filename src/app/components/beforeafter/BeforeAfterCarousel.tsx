@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import {
@@ -140,6 +140,25 @@ function formatCaseLabel(name: string): string {
   return label.replace(/\s2$/, "");
 }
 
+function getSingleCaseImageClass(
+  item: BeforeAfter,
+  isMobileViewport: boolean,
+): string {
+  if (item.id === "PDRN-de-salmon-con-dermapeen" && isMobileViewport) {
+    return "h-full w-full object-cover object-center";
+  }
+
+  if (item.id === "endodoncia") {
+    return "h-full w-full object-contain object-center";
+  }
+
+  if (item.aspect === "portrait" || isMobileViewport) {
+    return "h-full w-full object-contain object-top";
+  }
+
+  return "h-full w-full object-cover object-center";
+}
+
 const filterTabs = [
   { label: "Especialidades Dentales", category: "dental" as const },
   { label: "Armonización Facial", category: "facial" as const },
@@ -190,6 +209,60 @@ export default function BeforeAfterCarousel() {
   const [mobileFade, setMobileFade] = useState({ left: false, right: false });
   const swiperRef = useRef<SwiperType | null>(null);
   const mobileTabsRef = useRef<HTMLDivElement>(null);
+  const scrollLockRef = useRef(false);
+  const previousScrollStylesRef = useRef<{
+    htmlOverflow: string;
+    bodyOverflow: string;
+    htmlTouchAction: string;
+    bodyTouchAction: string;
+    htmlOverscrollBehavior: string;
+    bodyOverscrollBehavior: string;
+  } | null>(null);
+
+  const lockPageScroll = () => {
+    if (scrollLockRef.current) return;
+
+    const html = document.documentElement;
+    const body = document.body;
+
+    previousScrollStylesRef.current = {
+      htmlOverflow: html.style.overflow,
+      bodyOverflow: body.style.overflow,
+      htmlTouchAction: html.style.touchAction,
+      bodyTouchAction: body.style.touchAction,
+      htmlOverscrollBehavior: html.style.overscrollBehavior,
+      bodyOverscrollBehavior: body.style.overscrollBehavior,
+    };
+
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    html.style.touchAction = "none";
+    body.style.touchAction = "none";
+    html.style.overscrollBehavior = "none";
+    body.style.overscrollBehavior = "none";
+
+    scrollLockRef.current = true;
+  };
+
+  const unlockPageScroll = () => {
+    if (!scrollLockRef.current) return;
+
+    const previous = previousScrollStylesRef.current;
+    if (!previous) return;
+
+    const html = document.documentElement;
+    const body = document.body;
+
+    html.style.overflow = previous.htmlOverflow;
+    body.style.overflow = previous.bodyOverflow;
+    html.style.touchAction = previous.htmlTouchAction;
+    body.style.touchAction = previous.bodyTouchAction;
+    html.style.overscrollBehavior = previous.htmlOverscrollBehavior;
+    body.style.overscrollBehavior = previous.bodyOverscrollBehavior;
+
+    scrollLockRef.current = false;
+    previousScrollStylesRef.current = null;
+  };
 
   const isCompareHandleTarget = (
     target: EventTarget | null,
@@ -206,15 +279,18 @@ export default function BeforeAfterCarousel() {
   const handleComparePointerDownCapture = (
     event: React.PointerEvent<HTMLDivElement>,
   ) => {
-    if (!isMobileViewport) return;
     if (!isCompareHandleTarget(event.target)) return;
 
-    if (swiperRef.current) {
+    lockPageScroll();
+
+    if (isMobileViewport && swiperRef.current) {
       swiperRef.current.allowTouchMove = false;
     }
   };
 
   const handleComparePointerUpCapture = () => {
+    unlockPageScroll();
+
     if (swiperRef.current) {
       swiperRef.current.allowTouchMove = isMobileViewport;
     }
@@ -286,6 +362,8 @@ export default function BeforeAfterCarousel() {
 
   useEffect(() => {
     const unlockSwipe = () => {
+      unlockPageScroll();
+
       if (swiperRef.current) {
         swiperRef.current.allowTouchMove = isMobileViewport;
       }
@@ -301,6 +379,7 @@ export default function BeforeAfterCarousel() {
       window.removeEventListener("pointercancel", unlockSwipe);
       window.removeEventListener("touchend", unlockSwipe);
       window.removeEventListener("mouseup", unlockSwipe);
+      unlockPageScroll();
     };
   }, [isMobileViewport]);
 
@@ -309,9 +388,11 @@ export default function BeforeAfterCarousel() {
     swiperRef.current.allowTouchMove = isMobileViewport;
   }, [isMobileViewport]);
 
-  const filtered = activeFilter
-    ? cases.filter((c) => c.category === activeFilter)
-    : cases;
+  const filtered = useMemo(
+    () =>
+      activeFilter ? cases.filter((c) => c.category === activeFilter) : cases,
+    [activeFilter],
+  );
 
   if (!mounted) return null;
 
@@ -394,7 +475,7 @@ export default function BeforeAfterCarousel() {
                 </svg>
               </button>
 
-              <div className="min-w-0 flex-1">
+              <div className="min-w-0 flex-1 overflow-hidden">
                 <Swiper
                   key={activeFilter || "all"}
                   modules={[]}
@@ -409,127 +490,111 @@ export default function BeforeAfterCarousel() {
                   }}
                   className="before-after-swiper"
                 >
-                  {filtered.map((item, idx) => (
-                    <SwiperSlide key={idx}>
-                      {(() => {
-                        const calibration = compareCalibration[item.id] || {};
-                        const mobileCalibration = isMobileViewport
-                          ? calibration
-                          : {};
-                        const useContain =
-                          item.aspect === "portrait" || isMobileViewport;
-                        const objectFit = isMobileViewport
-                          ? mobileCalibration.mobileFit || "contain"
-                          : item.aspect === "portrait"
-                            ? "contain"
-                            : "cover";
-                        const defaultPosition =
-                          item.aspect === "portrait" ? "center top" : "center";
+                  {filtered.map((item) => {
+                    const calibration = compareCalibration[item.id] || {};
+                    const mobileCalibration = isMobileViewport
+                      ? calibration
+                      : {};
+                    const objectFit = isMobileViewport
+                      ? mobileCalibration.mobileFit || "contain"
+                      : item.aspect === "portrait"
+                        ? "contain"
+                        : "cover";
+                    const defaultPosition =
+                      item.aspect === "portrait" ? "center top" : "center";
+                    const caseHeight =
+                      item.aspect === "portrait" ? "460px" : "360px";
 
-                        return (
-                          <div className="px-2 pb-4">
-                            <p className="mb-4 text-center text-sm font-semibold uppercase tracking-wider text-taupe-light">
-                              {item.label}
-                            </p>
+                    return (
+                      <SwiperSlide key={item.id}>
+                        <div className="px-2 pb-4">
+                          <p className="mb-4 text-center text-sm font-semibold uppercase tracking-wider text-taupe-light">
+                            {item.label}
+                          </p>
 
-                            <div className="relative overflow-hidden rounded-2xl bg-ivory-dark">
-                              <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-2 bg-linear-to-b from-white/10 to-transparent" />
-                              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-2 bg-linear-to-t from-white/10 to-transparent" />
+                          <div className="relative overflow-hidden rounded-2xl bg-ivory-dark">
+                            <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-2 bg-linear-to-b from-white/10 to-transparent" />
+                            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-2 bg-linear-to-t from-white/10 to-transparent" />
 
-                              {item.variant === "compare" ? (
-                                <div
-                                  onPointerDownCapture={
-                                    handleComparePointerDownCapture
+                            {item.variant === "compare" ? (
+                              <div
+                                onPointerDownCapture={
+                                  handleComparePointerDownCapture
+                                }
+                                onPointerUpCapture={
+                                  handleComparePointerUpCapture
+                                }
+                                onPointerCancelCapture={
+                                  handleComparePointerUpCapture
+                                }
+                              >
+                                <ReactCompareSlider
+                                  onlyHandleDraggable
+                                  itemOne={
+                                    <ReactCompareSliderImage
+                                      src={item.before}
+                                      alt={`${item.label} — Antes`}
+                                      style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit,
+                                        objectPosition:
+                                          mobileCalibration.beforePosition ||
+                                          defaultPosition,
+                                        transform: `scale(${mobileCalibration.beforeScale || 1})`,
+                                        transformOrigin: "center",
+                                      }}
+                                    />
                                   }
-                                  onPointerUpCapture={
-                                    handleComparePointerUpCapture
+                                  itemTwo={
+                                    <ReactCompareSliderImage
+                                      src={item.after}
+                                      alt={`${item.label} — Después`}
+                                      style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit,
+                                        objectPosition:
+                                          mobileCalibration.afterPosition ||
+                                          defaultPosition,
+                                        transform: `scale(${mobileCalibration.afterScale || 1})`,
+                                        transformOrigin: "center",
+                                      }}
+                                    />
                                   }
-                                  onPointerCancelCapture={
-                                    handleComparePointerUpCapture
-                                  }
-                                >
-                                  <ReactCompareSlider
-                                    onlyHandleDraggable
-                                    itemOne={
-                                      <ReactCompareSliderImage
-                                        src={item.before}
-                                        alt={`${item.label} — Antes`}
-                                        style={{
-                                          width: "100%",
-                                          height: "100%",
-                                          objectFit,
-                                          objectPosition:
-                                            mobileCalibration.beforePosition ||
-                                            defaultPosition,
-                                          transform: `scale(${mobileCalibration.beforeScale || 1})`,
-                                          transformOrigin: "center",
-                                        }}
-                                      />
-                                    }
-                                    itemTwo={
-                                      <ReactCompareSliderImage
-                                        src={item.after}
-                                        alt={`${item.label} — Después`}
-                                        style={{
-                                          width: "100%",
-                                          height: "100%",
-                                          objectFit,
-                                          objectPosition:
-                                            mobileCalibration.afterPosition ||
-                                            defaultPosition,
-                                          transform: `scale(${mobileCalibration.afterScale || 1})`,
-                                          transformOrigin: "center",
-                                        }}
-                                      />
-                                    }
-                                    style={{
-                                      width: "100%",
-                                      height:
-                                        item.aspect === "portrait"
-                                          ? "460px"
-                                          : "360px",
-                                      position: "relative",
-                                      zIndex: 1,
-                                    }}
-                                  />
-                                </div>
-                              ) : (
-                                <div
-                                  className="relative flex items-center justify-center"
                                   style={{
                                     width: "100%",
-                                    height:
-                                      item.aspect === "portrait"
-                                        ? "460px"
-                                        : "360px",
+                                    height: caseHeight,
                                     position: "relative",
                                     zIndex: 1,
                                   }}
-                                >
-                                  <img
-                                    src={item.image || item.before}
-                                    alt={item.label}
-                                    className={`h-full w-full ${
-                                      item.id ===
-                                        "PDRN-de-salmon-con-dermapeen" &&
-                                      isMobileViewport
-                                        ? "object-cover object-center"
-                                        : item.id === "endodoncia"
-                                          ? "object-contain object-center"
-                                          : item.aspect === "portrait" ||
-                                              isMobileViewport
-                                            ? "object-contain object-top"
-                                            : "object-cover object-center"
-                                    }`}
-                                  />
-                                </div>
-                              )}
-                            </div>
+                                />
+                              </div>
+                            ) : (
+                              <div
+                                className="relative flex items-center justify-center"
+                                style={{
+                                  width: "100%",
+                                  height: caseHeight,
+                                  position: "relative",
+                                  zIndex: 1,
+                                }}
+                              >
+                                <img
+                                  src={item.image || item.before}
+                                  alt={item.label}
+                                  className={getSingleCaseImageClass(
+                                    item,
+                                    isMobileViewport,
+                                  )}
+                                />
+                              </div>
+                            )}
                           </div>
-                        );
-                      })()}
-                    </SwiperSlide>
-                  ))}
+                        </div>
+                      </SwiperSlide>
+                    );
+                  })}
 
                   {/* CTA Redes Sociales — último slide */}
                   <SwiperSlide>

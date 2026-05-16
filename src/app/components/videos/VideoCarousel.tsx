@@ -85,7 +85,7 @@ export default function VideoCarousel() {
             </svg>
           </button>
 
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 overflow-hidden">
             <Swiper
               modules={[]}
               allowTouchMove

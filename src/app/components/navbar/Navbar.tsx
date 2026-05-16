@@ -60,8 +60,10 @@ export default function Navbar() {
 
       {/* Nav */}
       <nav
-        className={`flex items-center gap-10 max-md:fixed max-md:top-0 max-md:left-0 max-md:z-1200 max-md:h-screen max-md:w-screen max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-10 max-md:bg-ivory max-md:p-8 max-md:transition-transform max-md:duration-300 ${
-          open ? "max-md:translate-x-0" : "max-md:translate-x-full"
+        className={`flex items-center gap-10 max-md:fixed max-md:inset-0 max-md:z-1200 max-md:h-screen max-md:w-screen max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-10 max-md:bg-ivory max-md:p-8 max-md:transition-opacity max-md:duration-300 ${
+          open
+            ? "max-md:opacity-100 max-md:pointer-events-auto"
+            : "max-md:opacity-0 max-md:pointer-events-none"
         }`}
       >
         {/* Logo dentro del menú móvil */}

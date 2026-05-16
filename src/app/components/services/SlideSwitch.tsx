@@ -115,15 +115,6 @@ export default function SlideSwitch() {
                 : "text-taupe-light hover:text-champagne-dark"
             }`}
           >
-            <img
-              src="/images/hero/logoIndividual.webp"
-              alt=""
-              className={`h-8 w-12 object-contain transition-all duration-300 ${
-                active === tab
-                  ? "brightness-0 invert"
-                  : "brightness-0 opacity-40"
-              }`}
-            />
             {tab}
           </button>
         ))}
@@ -194,6 +185,13 @@ export default function SlideSwitch() {
               title="Prótesis Dentales"
               description="Placas totales y parciales para restaurar tu sonrisa."
               icon="🦾"
+              image="/images/services/protesis.webp"
+              color="bg-sage-dark"
+            />
+            <ServiceCard
+              title="Rehabilitación"
+              description="Coronas, puentes, incrustaciones y carillas para recuperar función y estética dental."
+              icon="🛠️"
               image="/images/services/protesis.webp"
               color="bg-sage-dark"
             />
