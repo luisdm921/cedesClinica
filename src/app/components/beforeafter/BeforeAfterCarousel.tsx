@@ -77,7 +77,12 @@ const cases: BeforeAfter[] = [
   ...buildSingleCases("facial", ["PDRN-de-salmon-con-dermapeen"], "landscape"),
 
   ...buildSingleCases("dental", ["gingivectomia"], "portrait"),
-  ...buildSingleCases("dental", ["terceros-molares-collage"], "landscape"),
+
+  ...buildSingleCases(
+    "dental",
+    ["terceros-molares-collage", "endodoncia"],
+    "landscape",
+  ),
   ...buildSingleCases("dental", ["terceros-molares-collage-2"], "landscape"),
 ];
 
@@ -186,7 +191,9 @@ export default function BeforeAfterCarousel() {
   const swiperRef = useRef<SwiperType | null>(null);
   const mobileTabsRef = useRef<HTMLDivElement>(null);
 
-  const isCompareHandleTarget = (target: EventTarget | null): target is Element => {
+  const isCompareHandleTarget = (
+    target: EventTarget | null,
+  ): target is Element => {
     if (!(target instanceof Element)) return false;
 
     return Boolean(
@@ -425,17 +432,21 @@ export default function BeforeAfterCarousel() {
                               {item.label}
                             </p>
 
-                            <div
-                              className="relative overflow-hidden rounded-2xl bg-ivory-dark"
-                            >
+                            <div className="relative overflow-hidden rounded-2xl bg-ivory-dark">
                               <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-2 bg-linear-to-b from-white/10 to-transparent" />
                               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-2 bg-linear-to-t from-white/10 to-transparent" />
 
                               {item.variant === "compare" ? (
                                 <div
-                                  onPointerDownCapture={handleComparePointerDownCapture}
-                                  onPointerUpCapture={handleComparePointerUpCapture}
-                                  onPointerCancelCapture={handleComparePointerUpCapture}
+                                  onPointerDownCapture={
+                                    handleComparePointerDownCapture
+                                  }
+                                  onPointerUpCapture={
+                                    handleComparePointerUpCapture
+                                  }
+                                  onPointerCancelCapture={
+                                    handleComparePointerUpCapture
+                                  }
                                 >
                                   <ReactCompareSlider
                                     onlyHandleDraggable
@@ -499,11 +510,16 @@ export default function BeforeAfterCarousel() {
                                     src={item.image || item.before}
                                     alt={item.label}
                                     className={`h-full w-full ${
-                                      item.id === "PDRN-de-salmon-con-dermapeen" && isMobileViewport
+                                      item.id ===
+                                        "PDRN-de-salmon-con-dermapeen" &&
+                                      isMobileViewport
                                         ? "object-cover object-center"
-                                        : item.aspect === "portrait" || isMobileViewport
-                                          ? "object-contain object-top"
-                                          : "object-cover object-center"
+                                        : item.id === "endodoncia"
+                                          ? "object-contain object-center"
+                                          : item.aspect === "portrait" ||
+                                              isMobileViewport
+                                            ? "object-contain object-top"
+                                            : "object-cover object-center"
                                     }`}
                                   />
                                 </div>
