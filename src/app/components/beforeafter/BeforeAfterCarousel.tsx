@@ -77,6 +77,8 @@ const cases: BeforeAfter[] = [
   ...buildSingleCases("facial", ["PDRN-de-salmon-con-dermapeen"], "landscape"),
 
   ...buildSingleCases("dental", ["gingivectomia"], "portrait"),
+  ...buildSingleCases("dental", ["terceros-molares-collage"], "landscape"),
+  ...buildSingleCases("dental", ["terceros-molares-collage-2"], "landscape"),
 ];
 
 function buildCases(
@@ -120,6 +122,14 @@ function formatCaseLabel(name: string): string {
 
   if (name === "PDRN-de-salmon-con-dermapeen") {
     return "PDRN de Salmón con Dermapeen";
+  }
+
+  if (name === "terceros-molares-collage") {
+    return "Terceros Molares";
+  }
+
+  if (name === "terceros-molares-collage-2") {
+    return "Terceros Molares (Serie 2)";
   }
 
   return label.replace(/\s2$/, "");

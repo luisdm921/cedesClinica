@@ -1,6 +1,79 @@
 "use client";
 
+import { useState } from "react";
+
+type PackageCard = {
+  id: string;
+  badge: string;
+  title: string;
+  includes: string[];
+  idealFor: string[];
+  whatsappMessage: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
+const packageCards: PackageCard[] = [
+  {
+    id: "relax-cedes",
+    badge: "Mas popular",
+    title: "Relax CEDES",
+    includes: [
+      "Botox en maseteros",
+      "Acupuntura",
+      "Guarda personalizada",
+      "Medicamento antiinflamatorio y relajante muscular",
+    ],
+    idealFor: [
+      "Bruxismo",
+      "Dolor mandibular",
+      "Dolor de cabeza",
+      "Tension facial",
+      "Hipertrofia de maseteros",
+    ],
+    whatsappMessage: "Hola, me interesa el paquete Relax CEDES",
+    imageSrc: "/images/services/CedexRelax.webp",
+    imageAlt: "Relax CEDES - Tratamiento de bienestar facial",
+  },
+  {
+    id: "metabolic-reset",
+    badge: "Nuevo",
+    title: "Metabolic Reset",
+    includes: [
+      "Evaluacion clinica integral",
+      "Plan personalizado de regulacion metabolica",
+      "Protocolo para inflamacion y ansiedad por comer",
+      "Seguimiento y ajustes de habitos",
+    ],
+    idealFor: [
+      "No bajas de peso",
+      "Inflamacion constante",
+      "Ansiedad por comer",
+      "Resistencia al cambio",
+      "Fatiga",
+    ],
+    whatsappMessage: "Hola, me interesa el paquete Metabolic Reset",
+    imageSrc: "/images/services/metabolic-reset.webp",
+    imageAlt: "Metabolic Reset - Programa de bienestar metabolico",
+  },
+];
+
 export default function RelaxCedes() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const activePackage = packageCards[currentSlide];
+
+  const goToPrev = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? packageCards.length - 1 : prev - 1,
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentSlide((prev) =>
+      prev === packageCards.length - 1 ? 0 : prev + 1,
+    );
+  };
+
   return (
     <section className="bg-ivory px-6 py-24 md:px-12 lg:px-24">
       <div className="mx-auto max-w-6xl">
@@ -14,15 +87,56 @@ export default function RelaxCedes() {
           </p>
         </div>
 
-        {/* Card principal */}
+        {/* Controles del carrusel */}
+        <div className="mb-5 flex items-center justify-between gap-4">
+          <div className="text-sm font-medium text-taupe">
+            {currentSlide + 1} / {packageCards.length}
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={goToPrev}
+              aria-label="Paquete anterior"
+              className="rounded-full border border-sand-light bg-white p-2.5 text-petroleum transition-colors hover:bg-sand/20"
+            >
+              <svg
+                className="h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={goToNext}
+              aria-label="Siguiente paquete"
+              className="rounded-full border border-sand-light bg-white p-2.5 text-petroleum transition-colors hover:bg-sand/20"
+            >
+              <svg
+                className="h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Slide activo */}
         <div className="overflow-hidden rounded-3xl bg-white shadow-xl md:flex">
           {/* Lado izquierdo — Info */}
           <div className="flex flex-col justify-center p-10 md:flex-1 md:p-14">
             <span className="mb-2 inline-block w-fit rounded-full bg-champagne/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-champagne-dark">
-              Más popular
+              {activePackage.badge}
             </span>
             <h3 className="mb-6 text-3xl font-bold text-petroleum md:text-4xl">
-              Relax CEDES
+              {activePackage.title}
             </h3>
 
             {/* Incluye */}
@@ -31,12 +145,7 @@ export default function RelaxCedes() {
                 Incluye
               </h4>
               <ul className="space-y-3">
-                {[
-                  "Botox en maseteros",
-                  "Acupuntura",
-                  "Guarda personalizada",
-                  "Medicamento antiinflamatorio y relajante muscular",
-                ].map((item) => (
+                {activePackage.includes.map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sage/30 text-xs text-sage-dark">
                       ✓
@@ -53,13 +162,7 @@ export default function RelaxCedes() {
                 Ideal para
               </h4>
               <div className="flex flex-wrap gap-2">
-                {[
-                  "Bruxismo",
-                  "Dolor mandibular",
-                  "Dolor de cabeza",
-                  "Tensión facial",
-                  "Hipertrofia de maseteros",
-                ].map((tag) => (
+                {activePackage.idealFor.map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full border border-sand-light bg-sand/10 px-4 py-1.5 text-xs font-medium text-taupe"
@@ -72,7 +175,7 @@ export default function RelaxCedes() {
 
             {/* CTA */}
             <a
-              href="https://wa.me/528114110318?text=Hola%2C%20me%20interesa%20el%20paquete%20Relax%20CEDES"
+              href={`https://wa.me/528114110318?text=${encodeURIComponent(activePackage.whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-fit self-center items-center gap-2.5 rounded-full bg-petroleum px-8 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-petroleum-light md:self-start"
@@ -85,13 +188,30 @@ export default function RelaxCedes() {
           </div>
 
           {/* Lado derecho — Visual */}
-          <div className="relative min-h-75 md:flex-1">
+          <div className="relative min-h-80 md:min-h-145 md:flex-1">
             <img
-              src="/images/services/CedexRelax.webp"
-              alt="Relax CEDES — Tratamiento de bienestar facial"
+              src={activePackage.imageSrc}
+              alt={activePackage.imageAlt}
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
+        </div>
+
+        {/* Indicadores */}
+        <div className="mt-6 flex items-center justify-center gap-2">
+          {packageCards.map((pkg, idx) => (
+            <button
+              key={pkg.id}
+              type="button"
+              aria-label={`Ir a ${pkg.title}`}
+              onClick={() => setCurrentSlide(idx)}
+              className={`h-2.5 rounded-full transition-all ${
+                idx === currentSlide
+                  ? "w-8 bg-petroleum"
+                  : "w-2.5 bg-sand-dark/40 hover:bg-sand-dark/70"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
