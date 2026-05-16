@@ -130,11 +130,11 @@ function formatCaseLabel(name: string): string {
   }
 
   if (name === "terceros-molares-collage") {
-    return "Terceros Molares";
+    return "Muelas del juicio (terceros molares)";
   }
 
   if (name === "terceros-molares-collage-2") {
-    return "Terceros Molares (Serie 2)";
+    return "Muelas del juicio (terceros molares)";
   }
 
   return label.replace(/\s2$/, "");
