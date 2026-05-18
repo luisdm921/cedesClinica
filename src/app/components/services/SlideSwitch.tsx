@@ -204,7 +204,7 @@ export default function SlideSwitch() {
             />
             <ServiceCard
               title="Cirugía Oral"
-              description="Extracción de muelas del juicio(terceros molares) y gingivectomía."
+              description="Extracción de muelas del juicio (terceros molares) y gingivectomía."
               icon="🏥"
               image="/images/services/cirugia.webp"
               color="bg-sage-dark"

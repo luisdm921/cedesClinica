@@ -16,7 +16,7 @@ type PackageCard = {
 const packageCards: PackageCard[] = [
   {
     id: "relax-cedes",
-    badge: "Mas popular",
+    badge: "Más popular",
     title: "Relax CEDES",
     includes: [
       "Botox en maseteros",
@@ -28,7 +28,7 @@ const packageCards: PackageCard[] = [
       "Bruxismo",
       "Dolor mandibular",
       "Dolor de cabeza",
-      "Tension facial",
+      "Tensión facial",
       "Hipertrofia de maseteros",
     ],
     whatsappMessage: "Hola, me interesa el paquete Relax CEDES",
@@ -40,15 +40,15 @@ const packageCards: PackageCard[] = [
     badge: "Protocolo inyectable",
     title: "Real 360 Metabolic Reset",
     includes: [
-      "Regulacion metabolica",
+      "Regulación metabólica",
       "Control de apetito",
       "Auriculoterapia",
       "Apoyo neuromodulador",
-      "Acompanamiento personalizado",
+      "Acompañamiento personalizado",
     ],
     idealFor: [
       "No bajas de peso",
-      "Inflamacion constante",
+      "Inflamación constante",
       "Ansiedad por comer",
       "Resistencia al cambio",
       "Fatiga",

@@ -12,7 +12,7 @@ const reviews = [
   {
     name: "Edith Carvajal.",
     rating: 5,
-    text: "Me hice limpieza dental, me encanto el servico",
+    text: "Me hice limpieza dental, me encantó el servicio",
   },
 ] as const;
 
