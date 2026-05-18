@@ -79,8 +79,9 @@ export default function About() {
             <p className="text-sm leading-relaxed text-taupe-light md:text-base">
               Ofrecemos servicios odontológicos integrales que van desde la
               odontopediatría e implantes dentales, hasta cirugía de terceros
-              molares, prótesis, rehabilitación oral y estética dental.
-              Priorizamos siempre la funcionalidad y la salud de tu sonrisa.
+              molares, prótesis, rehabilitación oral, estética dental,
+              ortodoncia tradicional y ortodoncia invisible. Priorizamos siempre
+              la funcionalidad y la salud de tu sonrisa.
             </p>
           </div>
 
