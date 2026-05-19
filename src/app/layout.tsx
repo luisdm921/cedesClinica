@@ -20,6 +20,28 @@ export const metadata: Metadata = {
   title: "CEDES Clínica | Odontología y Armonización Facial",
   description:
     "Citas, tratamientos dentales, armonización facial y medicina estética en Monterrey.",
+  openGraph: {
+    title: "CEDES Clínica | Odontología y Armonización Facial",
+    description:
+      "Citas, tratamientos dentales, armonización facial y medicina estética en Monterrey.",
+    images: [
+      {
+        url: "/images/hero/mainLogo.webp",
+        width: 1200,
+        height: 630,
+        alt: "CEDES Clínica",
+      },
+    ],
+    type: "website",
+    locale: "es_MX",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CEDES Clínica | Odontología y Armonización Facial",
+    description:
+      "Citas, tratamientos dentales, armonización facial y medicina estética en Monterrey.",
+    images: ["/images/hero/mainLogo.webp"],
+  },
 };
 
 export default function RootLayout({

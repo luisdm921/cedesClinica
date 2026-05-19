@@ -1,18 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const navLinks = [
   { label: "Servicios", href: "#servicios" },
   { label: "Nosotros", href: "#nosotros" },
   { label: "Testimonios", href: "#testimonios" },
+  { label: "Resultados", href: "#resultados" },
   { label: "Contacto", href: "#contacto" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-1000 flex h-37.5 items-center justify-between bg-ivory/95 px-12 shadow-[0_2px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl max-md:h-25 max-md:px-6">

@@ -397,7 +397,7 @@ export default function BeforeAfterCarousel() {
   if (!mounted) return null;
 
   return (
-    <section className="bg-ivory-dark px-6 py-24 md:px-12 lg:px-24">
+    <section id="resultados" className="bg-ivory-dark px-6 py-24 md:px-12 lg:px-24">
       <div className="mx-auto max-w-2xl">
         <div className="mb-10 text-center">
           <h2 className="mb-3 text-[clamp(2rem,4vw,3.5rem)] font-bold text-petroleum">

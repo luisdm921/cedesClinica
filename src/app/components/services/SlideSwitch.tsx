@@ -85,7 +85,7 @@ export default function SlideSwitch() {
   }, []);
 
   return (
-    <section className="bg-white px-6 py-24 md:px-12 lg:px-24">
+    <section id="servicios" className="bg-white px-6 py-24 md:px-12 lg:px-24">
       <img
         src="/images/hero/LogoIndivudalTitulo.webp"
         alt="Cedes Clínica"
