@@ -17,6 +17,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cedesclinica.com.mx"),
   title: "CEDES Clínica | Odontología y Armonización Facial",
   description:
     "Citas, tratamientos dentales, armonización facial y medicina estética en Monterrey.",
