@@ -134,33 +134,56 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {/* Dra. Consuelo Chapa */}
-            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/40 p-6">
-              <div className="mb-5 h-56 w-56 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
+          {/* Dra. Consuelo Chapa — Card Principal */}
+          <div className="mb-12">
+            <div className="group flex flex-col items-center md:flex-row md:items-start md:text-left gap-8 rounded-3xl bg-white/60 p-8 shadow-lg ring-1 ring-champagne/40 w-full">
+              <div className="shrink-0 h-64 w-64 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
                 <img
                   src="/images/team/Dra. Consuelo Chapa.webp"
                   alt="Dra. Consuelo Chapa"
                   className="h-full w-full object-cover object-top"
                 />
               </div>
-              <h4 className="text-lg font-semibold text-petroleum">
-                Dra. Consuelo Chapa
-              </h4>
-              <p className="mt-1 text-sm font-medium text-sage-dark">
-                Implantes Dentales &middot; Cirugía &middot; Armonización
-                Orofacial
-              </p>
-              <p className="mt-3 max-w-xs text-sm leading-relaxed text-taupe-light">
-                Especialista en implantes dentales, cirugía de terceros molares
-                y armonización orofacial, con formación en México y Brasil. Su
-                enfoque crea resultados naturales, armónicos y funcionales,
-                priorizando la salud, estética y esencia de cada paciente.
-              </p>
+              <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                <span className="mb-2 inline-block rounded-full bg-petroleum/10 px-3 py-0.5 text-xs font-semibold uppercase tracking-wider text-petroleum">
+                  Directora &amp; Fundadora
+                </span>
+                <h4 className="text-xl font-bold text-petroleum">
+                  Dra. Consuelo Chapa
+                </h4>
+                <p className="mt-1 text-sm font-medium text-sage-dark">
+                  Implantología Oral | Cirugía Bucal | Armonización Orofacial
+                </p>
+                <div className="mt-4 text-sm leading-relaxed text-taupe-light">
+                  <p>
+                    Más de 34 años de experiencia. Directora y Fundadora de
+                    CEDES Clínica.
+                  </p>
+                  <p className="mt-2">
+                    Formación avanzada: Implantología, Cirugía Bucal,
+                    Periodoncia, Endodoncia y ATM.
+                  </p>
+                  <p className="mt-2">
+                    Especialización internacional: Estética Facial (México) y
+                    Armonización Orofacial (Brasil).
+                  </p>
+                  <p className="mt-2">
+                    Tratamiento de Bruxismo y ATM. Creadora del protocolo
+                    exclusivo RELAX 360:
+                  </p>
+                  <ul className="mt-1 list-disc list-inside">
+                    <li>Guarda oclusal personalizada.</li>
+                    <li>Toxina botulínica terapéutica en maseteros.</li>
+                    <li>Auriculoterapia antiestrés.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
+          </div>
 
+          <div className="grid gap-8 md:grid-cols-3">
             {/* Dr. Gilberto Zamarrón */}
-            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/40 p-6">
+            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/60 p-6 shadow-lg ring-1 ring-champagne/40">
               <div className="mb-5 h-56 w-56 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
                 <img
                   src="/images/team/Dr. Gilberto Zmarron.webp"
@@ -183,7 +206,7 @@ export default function About() {
             </div>
 
             {/* Dra. Alejandra Pineda Chávez */}
-            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/40 p-6">
+            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/60 p-6 shadow-lg ring-1 ring-champagne/40">
               <div className="mb-5 h-56 w-56 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
                 <img
                   src="/images/team/Dra. Alejandra Pineda.webp"
@@ -205,7 +228,7 @@ export default function About() {
             </div>
 
             {/* Dra. Denisse Torres */}
-            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/40 p-6">
+            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/60 p-6 shadow-lg ring-1 ring-champagne/40">
               <div className="mb-5 h-56 w-56 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
                 <img
                   src="/images/team/Dra. Denisse Torres.webp"
@@ -217,7 +240,8 @@ export default function About() {
                 Dra. Denisse Torres
               </h4>
               <p className="mt-1 text-sm font-medium text-sage-dark">
-                Odontología General &middot; Rehabilitación Oral &middot; Estética
+                Odontología General &middot; Rehabilitación Oral &middot;
+                Estética
               </p>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-taupe-light">
                 Odontóloga general con formación en rehabilitación oral,
