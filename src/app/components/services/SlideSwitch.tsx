@@ -236,7 +236,7 @@ export default function SlideSwitch() {
               color="bg-sage-dark"
             />
             <ServiceCard
-              title="Técnica Real 360°"
+              title="Técnica Real 360®"
               description="Armonización integral del rostro para un resultado natural y equilibrado."
               icon=""
               image="/images/services/tecnica_360.webp"
@@ -325,7 +325,10 @@ function ServiceCard({
               className="mb-3 h-16 w-16 object-contain"
             />
           )}
-          <h3 className="text-center text-xl font-bold text-white">{title}</h3>
+          <h3 className="text-center text-xl font-bold text-white">
+            {title.replace("®", "").trim()}
+            {title.includes("®") && <sup className="text-[0.65em]">®</sup>}
+          </h3>
           <span className="mt-3 flex items-center gap-1 text-xs font-medium text-white/70">
             Ver más
             <svg
@@ -347,7 +350,8 @@ function ServiceCard({
         {/* Back */}
         <div className="backface-hidden absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-ivory p-6 shadow-lg transform-[rotateY(180deg)]">
           <h3 className="mb-3 text-center text-xl font-bold text-petroleum">
-            {title}
+            {title.replace("®", "").trim()}
+            {title.includes("®") && <sup className="text-[0.65em]">®</sup>}
           </h3>
           <p className="text-center text-sm leading-relaxed text-taupe-light">
             {description}

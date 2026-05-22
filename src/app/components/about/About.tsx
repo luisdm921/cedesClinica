@@ -106,10 +106,10 @@ export default function About() {
               Armonización Orofacial de Autor
             </h3>
             <p className="text-sm leading-relaxed text-taupe-light md:text-base">
-              Nos distinguimos por aplicar la técnica exclusiva REAL 360° de la
-              Dra. Consuelo Chapa, creada para lograr resultados armónicos,
-              naturales y equilibrados, respetando siempre la esencia única de
-              tu rostro.
+              Nos distinguimos por aplicar la técnica exclusiva REAL 360
+              <sup className="text-[0.65em]">®</sup> de la Dra. Consuelo Chapa,
+              creada para lograr resultados armónicos, naturales y equilibrados,
+              respetando siempre la esencia única de tu rostro.
             </p>
           </div>
         </div>
@@ -169,7 +169,7 @@ export default function About() {
                   </p>
                   <p className="mt-2">
                     Tratamiento de Bruxismo y ATM. Creadora del protocolo
-                    exclusivo RELAX 360:
+                    exclusivo RELAX 360<sup className="text-[0.65em]">®</sup>:
                   </p>
                   <ul className="mt-1 list-disc list-inside">
                     <li>Guarda oclusal personalizada.</li>

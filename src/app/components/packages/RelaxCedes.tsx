@@ -15,12 +15,12 @@ type PackageCard = {
 
 const packageCards: PackageCard[] = [
   {
-    id: "relax-cedes",
+    id: "relax-360",
     badge: "Más popular",
-    title: "Relax CEDES",
+    title: "Relax 360®",
     includes: [
       "Botox en maseteros",
-      "Acupuntura",
+      "Auriculoterapia",
       "Guarda personalizada",
       "Medicamento antiinflamatorio y relajante muscular",
     ],
@@ -28,17 +28,20 @@ const packageCards: PackageCard[] = [
       "Bruxismo",
       "Dolor mandibular",
       "Dolor de cabeza",
-      "Tensión facial",
+      "Desgaste dental",
+      "Tensión en cuello y cara",
       "Hipertrofia de maseteros",
+      "Estrés / Ansiedad",
+      "No dormir bien",
     ],
-    whatsappMessage: "Hola, me interesa el paquete Relax CEDES",
+    whatsappMessage: "Hola, me interesa el paquete Relax 360®",
     imageSrc: "/images/services/CedexRelax.webp",
-    imageAlt: "Relax CEDES - Tratamiento de bienestar facial",
+    imageAlt: "Relax 360® - Tratamiento de bienestar facial",
   },
   {
     id: "metabolic-reset",
     badge: "Protocolo inyectable",
-    title: "Real 360 Metabolic Reset",
+    title: "Real 360® Metabolic Reset",
     includes: [
       "Regulación metabólica",
       "Control de apetito",
@@ -148,7 +151,10 @@ export default function RelaxCedes() {
                 {activePackage.badge}
               </span>
               <h3 className="mb-6 text-3xl font-bold text-petroleum md:text-4xl">
-                {activePackage.title}
+                {activePackage.title.replace("®", "").trim()}
+                {activePackage.title.includes("®") && (
+                  <sup className="text-[0.65em]">®</sup>
+                )}
               </h3>
 
               {/* Incluye */}
