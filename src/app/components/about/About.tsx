@@ -134,9 +134,9 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Dra. Consuelo Chapa */}
-            <div className="group flex flex-col items-center text-center">
+            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/40 p-6">
               <div className="mb-5 h-56 w-56 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
                 <img
                   src="/images/team/Dra. Consuelo Chapa.webp"
@@ -160,7 +160,7 @@ export default function About() {
             </div>
 
             {/* Dr. Gilberto Zamarrón */}
-            <div className="group flex flex-col items-center text-center">
+            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/40 p-6">
               <div className="mb-5 h-56 w-56 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
                 <img
                   src="/images/team/Dr. Gilberto Zmarron.webp"
@@ -183,7 +183,7 @@ export default function About() {
             </div>
 
             {/* Dra. Alejandra Pineda Chávez */}
-            <div className="group flex flex-col items-center text-center">
+            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/40 p-6">
               <div className="mb-5 h-56 w-56 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
                 <img
                   src="/images/team/Dra. Alejandra Pineda.webp"
@@ -201,6 +201,29 @@ export default function About() {
                 Especialista en endodoncia, con amplia experiencia desde 1991,
                 enfocada en preservar la salud dental mediante tratamientos
                 precisos, profesionales y de alta calidad.
+              </p>
+            </div>
+
+            {/* Dra. Denisse Torres */}
+            <div className="group flex flex-col items-center text-center rounded-2xl bg-white/40 p-6">
+              <div className="mb-5 h-56 w-56 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
+                <img
+                  src="/images/team/Dra. Denisse Torres.webp"
+                  alt="Dra. Denisse Torres"
+                  className="h-full w-full object-cover object-top"
+                />
+              </div>
+              <h4 className="text-lg font-semibold text-petroleum">
+                Dra. Denisse Torres
+              </h4>
+              <p className="mt-1 text-sm font-medium text-sage-dark">
+                Odontología General &middot; Rehabilitación Oral &middot; Estética
+              </p>
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-taupe-light">
+                Odontóloga general con formación en rehabilitación oral,
+                especializada en operatoria, estética y atención de trastornos
+                de la ATM. Brinda una atención de calidad priorizando la salud,
+                función y estética de cada paciente.
               </p>
             </div>
           </div>
