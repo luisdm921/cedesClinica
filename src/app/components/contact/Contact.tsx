@@ -76,6 +76,32 @@ export default function Contact() {
               </div>
             </div>
 
+            {/* Doctoralia */}
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sage/20">
+                <svg
+                  className="h-6 w-6 text-sage-light"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm0 14c-2.5 0-4.71-1.28-6-3.22.03-2 4-3.08 6-3.08s5.97 1.08 6 3.08A7.96 7.96 0 0112 19z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="mb-1 text-sm font-bold uppercase tracking-wider text-champagne">
+                  Doctoralia
+                </h3>
+                <a
+                  href="https://www.doctoralia.com.mx/consuelo-chapa-garza/dentista-odontologo/nuevo-leon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg text-ivory transition-colors hover:text-champagne-light"
+                >
+                  Dra. Consuelo Chapa Garza
+                </a>
+              </div>
+            </div>
+
             {/* Dirección */}
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sage/20">

@@ -1,4 +1,4 @@
-import Hero from "./components/hero/page";
+import Hero from "./components/hero/Hero";
 import About from "./components/about/About";
 import SlideSwitch from "./components/services/SlideSwitch";
 import RelaxCedes from "./components/packages/RelaxCedes";

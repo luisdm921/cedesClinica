@@ -40,6 +40,18 @@ export default function Footer() {
               <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.88 2.89 2.89 0 01-2.88-2.88 2.89 2.89 0 012.88-2.88c.28 0 .56.04.82.11V9.4a6.33 6.33 0 00-.82-.05A6.34 6.34 0 003.15 15.7a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V9.41a8.16 8.16 0 004.76 1.52v-3.4a4.85 4.85 0 01-1-.84z" />
             </svg>
           </a>
+          {/* Doctoralia */}
+          <a
+            href="https://www.doctoralia.com.mx/consuelo-chapa-garza/dentista-odontologo/nuevo-leon"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-ivory/10 text-ivory transition-colors hover:bg-champagne/30 hover:text-champagne"
+            aria-label="Doctoralia"
+          >
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm0 14c-2.5 0-4.71-1.28-6-3.22.03-2 4-3.08 6-3.08s5.97 1.08 6 3.08A7.96 7.96 0 0112 19z" />
+            </svg>
+          </a>
         </div>
 
         <p className="text-sm text-ivory/50">cedes1828@gmail.com</p>

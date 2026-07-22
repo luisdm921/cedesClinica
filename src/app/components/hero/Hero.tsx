@@ -1,7 +1,6 @@
 export default function Hero() {
   return (
     <section className="flex min-h-screen flex-col overflow-hidden bg-ivory pt-37.5 md:flex-row max-md:pt-25">
-      {/* Lado izquierdo — Contenido */}
       <div className="relative z-10 flex flex-col items-center justify-center px-6 py-10 text-center md:flex-[0_1_40%] md:items-start md:px-12 md:py-12 md:text-left lg:px-24">
         <h1 className="mb-5 flex w-full max-w-[12ch] flex-col font-heading text-[clamp(2.3rem,10vw,4.5rem)] font-semibold leading-[0.95] md:max-w-none md:text-[clamp(2.8rem,5.5vw,4.5rem)] md:leading-[1.1]">
           <span className="block w-full text-petroleum md:whitespace-nowrap">
@@ -30,13 +29,7 @@ export default function Hero() {
         </a>
       </div>
 
-      {/* Lado derecho — Imagen */}
       <div className="relative flex min-h-55 flex-[1_1_60%] items-end justify-center md:min-h-[calc(100vh-150px)]">
-        {/* <span
-          className="absolute h-3/4 w-3/4 bg-petroleum"
-          style={{ borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%" }}
-          aria-hidden="true"
-        /> */}
         <img
           src="/images/hero/hero.webp"
           alt="Dentista sonriendo en la clínica dental"
