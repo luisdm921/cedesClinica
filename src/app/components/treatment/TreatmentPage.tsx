@@ -16,60 +16,33 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
 
   return (
     <main className="bg-ivory pt-37.5 max-md:pt-25">
-      <section className="overflow-hidden bg-petroleum text-ivory">
-        <div className="mx-auto grid min-h-130 max-w-7xl md:grid-cols-2">
-          <div className="flex flex-col justify-center px-6 py-16 md:px-12 lg:px-20">
-            <nav className="mb-8 text-sm text-ivory/70" aria-label="Breadcrumb">
-              <Link className="transition-colors hover:text-champagne" href="/">
-                Inicio
-              </Link>
-              <span aria-hidden="true"> / </span>
-              <span>{treatment.name}</span>
-            </nav>
+      <section className="bg-petroleum text-ivory">
+        <div className="mx-auto flex max-w-190 flex-col items-center px-6 py-12 text-center md:px-10 md:py-14">
+          <nav className="mb-6 text-sm text-ivory/70" aria-label="Breadcrumb">
+            <Link className="transition-colors hover:text-champagne" href="/">
+              Inicio
+            </Link>
+            <span aria-hidden="true"> / </span>
+            <span>{treatment.name}</span>
+          </nav>
 
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-champagne-light">
-              {treatment.hero.eyebrow ?? "Tratamientos CEDES"}
-            </p>
-            <h1 className="max-w-4xl text-[clamp(2.7rem,6vw,5rem)] font-semibold leading-[0.98]">
-              {treatment.hero.title}
-            </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ivory/85">
-              {treatment.hero.summary}
-            </p>
-            <a
-              className="mt-9 inline-flex w-fit rounded-full bg-champagne px-7 py-3.5 font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-champagne-dark"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Agendar valoración
-            </a>
-          </div>
-
-          {treatment.hero.image ? (
-            <div className="relative min-h-85 md:min-h-full">
-              <Image
-                src={treatment.hero.image.src}
-                alt={treatment.hero.image.alt}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-                unoptimized
-              />
-            </div>
-          ) : (
-            <div className="flex min-h-70 items-center justify-center bg-petroleum-dark/35 p-12">
-              <Image
-                src="/images/hero/LogoIndivudalTitulo.webp"
-                alt="CEDES Clínica"
-                width={520}
-                height={240}
-                className="h-auto w-full max-w-md object-contain opacity-90"
-                unoptimized
-              />
-            </div>
-          )}
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-champagne-light">
+            {treatment.hero.eyebrow ?? "Tratamientos CEDES"}
+          </p>
+          <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[0.98]">
+            {treatment.hero.title}
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ivory/85">
+            {treatment.hero.summary}
+          </p>
+          <a
+            className="mt-7 inline-flex rounded-full bg-champagne px-7 py-3.5 font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-champagne-dark"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Agendar valoración
+          </a>
         </div>
       </section>
 
@@ -95,7 +68,10 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
             </h2>
             <ul className="space-y-5">
               {treatment.differentiators.map((item) => (
-                <li className="flex gap-3 leading-relaxed text-taupe-light" key={item}>
+                <li
+                  className="flex gap-3 leading-relaxed text-taupe-light"
+                  key={item}
+                >
                   <span
                     className="mt-2 h-2 w-2 shrink-0 rounded-full bg-champagne"
                     aria-hidden="true"
@@ -141,11 +117,14 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
             </h2>
             <div className="grid gap-8 md:grid-cols-2">
               {treatment.cases.map((item) => (
-                <article className="overflow-hidden rounded-3xl bg-white shadow-lg" key={item.title}>
+                <article
+                  className="overflow-hidden rounded-3xl bg-white shadow-lg"
+                  key={item.title}
+                >
                   <div className="grid grid-cols-2">
                     {[item.before, item.after].map((image, index) => (
                       <figure key={image.src}>
-                        <div className="relative aspect-square">
+                        <div className="relative aspect-2/1">
                           <Image
                             src={image.src}
                             alt={image.alt}
@@ -178,7 +157,10 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
           </h2>
           <div className="space-y-4">
             {treatment.faq.map((item) => (
-              <details className="group rounded-2xl bg-ivory p-6" key={item.question}>
+              <details
+                className="group rounded-2xl bg-ivory p-6"
+                key={item.question}
+              >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold text-petroleum">
                   {item.question}
                   <span className="text-2xl font-light text-champagne transition-transform group-open:rotate-45">
@@ -221,7 +203,8 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
             Da el siguiente paso con una valoración
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ivory/80">
-            Nuestro equipo revisará tu caso y te explicará las alternativas de atención disponibles.
+            Nuestro equipo revisará tu caso y te explicará las alternativas de
+            atención disponibles.
           </p>
           <a
             className="mt-8 inline-flex rounded-full bg-champagne px-8 py-3.5 font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-champagne-dark"
