@@ -50,7 +50,8 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
         <section className="bg-white px-6 py-16 md:px-12 lg:px-24">
           <div className="mx-auto min-w-0 max-w-6xl">
             <h2 className="mb-10 text-center text-[clamp(2.2rem,4vw,3.5rem)] font-semibold text-petroleum">
-              Atención dental infantil en CEDES
+              Conoce la atención de {treatment.name.toLocaleLowerCase("es-MX")}{" "}
+              en CEDES
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
               {treatment.images.map((image) => (

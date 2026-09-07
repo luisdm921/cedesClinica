@@ -1,5 +1,6 @@
 import type { TreatmentContent } from "./types";
 import odontopediatria from "./entries/odontopediatria";
+import ortodoncia from "./entries/ortodoncia";
 import resinasCarillasDentales from "./entries/resinas-carillas-dentales";
 
 /**
@@ -9,6 +10,7 @@ import resinasCarillasDentales from "./entries/resinas-carillas-dentales";
 export const treatmentCatalog: TreatmentContent[] = [
   resinasCarillasDentales,
   odontopediatria,
+  ortodoncia,
 ];
 
 export const publishedTreatments = treatmentCatalog.filter(
