@@ -1,4 +1,5 @@
 import type { TreatmentContent } from "./types";
+import invisalign from "./entries/invisalign";
 import odontopediatria from "./entries/odontopediatria";
 import ortodoncia from "./entries/ortodoncia";
 import resinasCarillasDentales from "./entries/resinas-carillas-dentales";
@@ -11,6 +12,7 @@ export const treatmentCatalog: TreatmentContent[] = [
   resinasCarillasDentales,
   odontopediatria,
   ortodoncia,
+  invisalign,
 ];
 
 export const publishedTreatments = treatmentCatalog.filter(
