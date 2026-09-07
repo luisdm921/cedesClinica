@@ -15,7 +15,7 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
     .filter((item): item is TreatmentContent => Boolean(item));
 
   return (
-    <main className="bg-ivory pt-37.5 max-md:pt-25">
+    <main className="min-w-0 bg-ivory pt-37.5 max-md:pt-25">
       <section className="bg-petroleum text-ivory">
         <div className="mx-auto flex max-w-190 flex-col items-center px-6 py-12 text-center md:px-10 md:py-14">
           <nav className="mb-6 text-sm text-ivory/70" aria-label="Breadcrumb">
@@ -46,9 +46,38 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
         </div>
       </section>
 
+      {treatment.images && treatment.images.length > 0 && (
+        <section className="bg-white px-6 py-16 md:px-12 lg:px-24">
+          <div className="mx-auto min-w-0 max-w-6xl">
+            <h2 className="mb-10 text-center text-[clamp(2.2rem,4vw,3.5rem)] font-semibold text-petroleum">
+              Atención dental infantil en CEDES
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              {treatment.images.map((image) => (
+                <figure
+                  className="overflow-hidden rounded-3xl bg-ivory"
+                  key={image.src}
+                >
+                  <div className="relative aspect-[4/3]">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                      unoptimized
+                    />
+                  </div>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="px-6 py-20 md:px-12 lg:px-24">
-        <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1.3fr_0.7fr]">
-          <article>
+        <div className="mx-auto grid min-w-0 max-w-6xl gap-14 lg:grid-cols-[1.3fr_0.7fr]">
+          <article className="min-w-0">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-champagne-dark">
               Conoce el tratamiento
             </p>
@@ -62,7 +91,7 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
             </div>
           </article>
 
-          <aside className="h-fit rounded-3xl bg-white p-7 shadow-[0_18px_50px_rgba(31,77,70,0.1)] md:p-9">
+          <aside className="h-fit min-w-0 rounded-3xl bg-white p-7 shadow-[0_18px_50px_rgba(31,77,70,0.1)] md:p-9">
             <h2 className="mb-6 text-3xl font-semibold text-petroleum">
               Atención CEDES
             </h2>
@@ -86,7 +115,7 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
 
       {treatment.process && treatment.process.length > 0 && (
         <section className="bg-white px-6 py-20 md:px-12 lg:px-24">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto min-w-0 max-w-6xl">
             <h2 className="mb-10 text-center text-[clamp(2.2rem,4vw,3.5rem)] font-semibold text-petroleum">
               ¿Cómo es el proceso?
             </h2>
@@ -111,7 +140,7 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
 
       {treatment.cases && treatment.cases.length > 0 && (
         <section className="px-6 py-20 md:px-12 lg:px-24">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto min-w-0 max-w-6xl">
             <h2 className="mb-10 text-center text-[clamp(2.2rem,4vw,3.5rem)] font-semibold text-petroleum">
               Casos y resultados
             </h2>

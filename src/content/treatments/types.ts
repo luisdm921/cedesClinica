@@ -39,6 +39,7 @@ export type TreatmentContent = {
     summary: string;
     image?: TreatmentImage;
   };
+  images?: TreatmentImage[];
   description: string[];
   differentiators: string[];
   faq: TreatmentFaq[];

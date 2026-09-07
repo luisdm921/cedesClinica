@@ -17,7 +17,8 @@ Solo los registros con `status: "published"` son devueltos por `generateStaticPa
 - La fuente principal es la información entregada por la doctora.
 - Se permite resumir, ordenar y fusionar repeticiones.
 - No se permite inventar afirmaciones clínicas, credenciales, precios o resultados.
-- `process`, `cases`, `relatedTreatmentSlugs` y las imágenes son opcionales.
+- `process`, `images`, `cases` y `relatedTreatmentSlugs` son opcionales. `images` es una galería de fotografías ilustrativas y no sustituye a `cases`.
+- `cases` se reserva para pares Antes/Después cuya relación sea verificable en la fuente.
 - Las fotografías de pacientes solo se agregan cuando existe autorización para utilizarlas.
 - La revisión humana debe completarse antes de cambiar `status` a `published`.
 

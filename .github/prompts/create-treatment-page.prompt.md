@@ -27,7 +27,8 @@ Analiza el documento o texto que te proporcionaré y crea una nueva página de t
 - Guarda las imágenes extraídas en `public/images/tratamientos/<slug>/` con nombres descriptivos y estables.
 - Si una imagen contiene claramente una composición de Antes y Después, conserva el original y genera recortes separados solo cuando la división sea inequívoca; usa esos recortes en `cases`.
 - Registra en `cases` únicamente imágenes cuya relación Antes/Después sea verificable en la fuente. Usa textos alternativos descriptivos sin inventar datos clínicos.
-- Si no existen imágenes autorizadas o no es posible identificar una relación Antes/Después con seguridad, omite `hero.image` y `cases`.
+- Si existen fotografías autorizadas del tratamiento, pero no forman una relación Antes/Después verificable, regístralas en `images` como galería ilustrativa. No las registres en `cases`.
+- Si no existen imágenes autorizadas, omite `hero.image`, `images` y `cases`.
 - Usa rutas de imágenes dentro de `public/images/`.
 
 ### Procedimiento para imágenes en PDF
@@ -41,7 +42,7 @@ Cuando la fuente sea un PDF con imágenes autorizadas:
 5. Si una imagen es una composición vertical u horizontal con etiquetas visibles de Antes y Después, conserva el archivo original y crea dos recortes: uno para Antes y otro para Después. Respeta la línea divisoria o el margen entre ambas partes y no mezcles contenido de una con otra.
 6. Usa los recortes en `cases.before` y `cases.after`, y conserva el original como respaldo de la fuente. No registres la composición completa como las dos imágenes del caso.
 7. Comprueba dimensiones, formato y existencia de todos los archivos antes de registrar sus rutas en el contenido.
-8. Si la separación no es inequívoca, conserva únicamente el original fuera de `cases` o no copies la imagen, según la autorización recibida; no inventes una división.
+8. Si la separación no es inequívoca, conserva la imagen original en `images` solo como fotografía ilustrativa cuando exista autorización; no inventes una división para `cases`.
 
 ## Criterios editoriales
 
