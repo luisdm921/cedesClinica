@@ -346,10 +346,10 @@ function ServiceCard({
         aria-expanded={flipped}
         aria-label={`${flipped ? "Ocultar" : "Ver"} información de ${title.replace("®", "").trim()}`}
         onClick={() => setFlipped((value) => !value)}
-        className="block h-full w-full cursor-pointer rounded-2xl border-0 bg-transparent p-0 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-petroleum"
-      >
+        className="absolute inset-0 z-10 block h-full w-full cursor-pointer rounded-2xl border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-petroleum"
+      />
         <div
-          className={`relative h-full w-full transition-transform duration-500 transform-3d ${
+          className={`pointer-events-none relative z-20 h-full w-full transition-transform duration-500 transform-3d ${
             flipped ? "transform-[rotateY(180deg)]" : ""
           }`}
         >
@@ -395,28 +395,22 @@ function ServiceCard({
             <p className="text-center text-sm leading-relaxed text-taupe-light">
               {description}
             </p>
+            {resolvedTreatments.length > 0 && (
+              <div className="mt-4 flex flex-wrap justify-center gap-2">
+                {resolvedTreatments.map((treatment) => (
+                  <Link
+                    key={treatment.slug}
+                    href={`/${treatment.slug}`}
+                    tabIndex={flipped ? 0 : -1}
+                    className="pointer-events-auto rounded-full bg-champagne px-3 py-1.5 text-xs font-semibold text-white underline-offset-4 hover:bg-champagne-dark hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-petroleum"
+                  >
+                    {treatmentLinkLabels[treatment.slug]}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </button>
-      {resolvedTreatments.length > 0 && (
-        <div
-          className={`absolute inset-x-6 bottom-5 flex flex-wrap justify-center gap-2 transition-opacity ${
-            flipped ? "opacity-100" : "pointer-events-none opacity-0"
-          }`}
-        >
-          {resolvedTreatments.map((treatment) => (
-            <Link
-              key={treatment.slug}
-              href={`/${treatment.slug}`}
-              tabIndex={flipped ? 0 : -1}
-              onClick={(event) => event.stopPropagation()}
-              className="rounded-full bg-champagne px-3 py-1.5 text-xs font-semibold text-white underline-offset-4 hover:bg-champagne-dark hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-petroleum"
-            >
-              {treatmentLinkLabels[treatment.slug]}
-            </Link>
-          ))}
-        </div>
-      )}
     </article>
   );
 }
