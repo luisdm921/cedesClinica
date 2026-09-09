@@ -135,6 +135,7 @@ export default function About() {
           </div>
 
           {/* Dra. Consuelo Chapa — Card Principal */}
+          {/* El perfil se enlazará desde este card cuando se publique la plantilla profesional. */}
           <div className="mb-12">
             <div className="group flex flex-col items-center md:flex-row md:items-start md:text-left gap-8 rounded-3xl bg-white/60 p-8 shadow-lg ring-1 ring-champagne/40 w-full">
               <div className="shrink-0 h-64 w-64 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">

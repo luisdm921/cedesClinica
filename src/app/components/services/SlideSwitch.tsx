@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { publishedTreatments } from "@/content/treatments/catalog";
+import type { TreatmentSlug } from "@/content/treatments/planned";
 
 const tabs = [
   "Especialidades Dentales",
@@ -161,6 +162,7 @@ export default function SlideSwitch() {
               icon="🦷"
               image="/images/services/odontologia.webp"
               color="bg-sage-dark"
+              treatmentSlugs={["resinas-carillas-dentales"]}
             />
             <ServiceCard
               title="Endodoncia"
@@ -168,7 +170,7 @@ export default function SlideSwitch() {
               icon="🩺"
               image="/images/services/endodoncia.webp"
               color="bg-sage-dark"
-              treatmentSlug="endodoncia"
+              treatmentSlugs={["endodoncia"]}
             />
             <ServiceCard
               title="Ortodoncia"
@@ -176,7 +178,7 @@ export default function SlideSwitch() {
               icon="😁"
               image="/images/services/ortodoncia.webp"
               color="bg-sage-dark"
-              treatmentSlug="ortodoncia"
+              treatmentSlugs={["ortodoncia", "invisalign"]}
             />
             <ServiceCard
               title="Implantes Dentales"
@@ -184,7 +186,7 @@ export default function SlideSwitch() {
               icon="🔩"
               image="/images/services/implantes.webp"
               color="bg-sage-dark"
-              treatmentSlug="implantes-dentales"
+              treatmentSlugs={["implantes-dentales"]}
             />
             <ServiceCard
               title="Prótesis Dentales"
@@ -199,6 +201,7 @@ export default function SlideSwitch() {
               icon="🛠️"
               image="/images/services/protesis.webp"
               color="bg-sage-dark"
+              treatmentSlugs={["resinas-carillas-dentales"]}
             />
             <ServiceCard
               title="Odontopediatría"
@@ -206,7 +209,7 @@ export default function SlideSwitch() {
               icon="👶"
               image="/images/services/odontopediatria.webp"
               color="bg-sage-dark"
-              treatmentSlug="odontopediatria"
+              treatmentSlugs={["odontopediatria"]}
             />
             <ServiceCard
               title="Cirugía Oral"
@@ -214,7 +217,7 @@ export default function SlideSwitch() {
               icon="🏥"
               image="/images/services/cirugia.webp"
               color="bg-sage-dark"
-              treatmentSlug="cirugia-terceros-molares"
+              treatmentSlugs={["cirugia-terceros-molares"]}
             />
           </div>
         )}
@@ -227,7 +230,7 @@ export default function SlideSwitch() {
               icon=""
               image="/images/services/acido.webp"
               color="bg-sage-dark"
-              treatmentSlug="acido-hialuronico-facial"
+              treatmentSlugs={["acido-hialuronico-facial"]}
             />
             <ServiceCard
               title="Toxina Botulínica (Botox)"
@@ -235,7 +238,7 @@ export default function SlideSwitch() {
               icon=""
               image="/images/services/botox.webp"
               color="bg-sage-dark"
-              treatmentSlug="toxina-botulinica-facial"
+              treatmentSlugs={["toxina-botulinica-facial"]}
             />
             <ServiceCard
               title="Bioestimuladores de Colágeno"
@@ -250,6 +253,7 @@ export default function SlideSwitch() {
               icon=""
               image="/images/services/tecnica_360.webp"
               color="bg-sage-dark"
+              treatmentSlugs={["armonizacion-orofacial"]}
             />
             <ServiceCard
               title="Cirugía Estética Menor"
@@ -304,92 +308,115 @@ function ServiceCard({
   icon,
   image,
   color = "bg-champagne",
-  treatmentSlug,
+  treatmentSlugs,
 }: {
   title: string;
   description: string;
   icon: string;
   image?: string;
   color?: string;
-  treatmentSlug?: string;
+  treatmentSlugs?: TreatmentSlug[];
 }) {
   const [flipped, setFlipped] = useState(false);
-  const hasPublishedTreatment = treatmentSlug
-    ? publishedTreatments.some((treatment) => treatment.slug === treatmentSlug)
-    : false;
+  const resolvedTreatments = (treatmentSlugs ?? []).flatMap((slug) => {
+    const treatment = publishedTreatments.find(
+      (candidate) => candidate.slug === slug,
+    );
+
+    return treatment ? [{ slug }] : [];
+  });
+
+  const treatmentLinkLabels: Record<TreatmentSlug, string> = {
+    endodoncia: "Ver Endodoncia",
+    ortodoncia: "Ver Ortodoncia",
+    invisalign: "Ver Invisalign",
+    odontopediatria: "Ver Atención dental infantil",
+    "resinas-carillas-dentales": "Ver Resinas y carillas",
+    "implantes-dentales": "Ver Implantes dentales",
+    "cirugia-terceros-molares": "Ver Cirugía de terceros molares",
+    "acido-hialuronico-facial": "Ver Ácido hialurónico",
+    "toxina-botulinica-facial": "Ver Toxina botulínica",
+    "armonizacion-orofacial": "Ver Armonización orofacial",
+  };
 
   return (
-    <div
-      className="perspective-[1000px] h-52 w-full cursor-pointer sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
-      onClick={() => setFlipped(!flipped)}
-      onKeyDown={(event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          setFlipped((value) => !value);
-        }
-      }}
-      role="button"
-      tabIndex={0}
-      aria-label={`${flipped ? "Ocultar" : "Ver"} información de ${title.replace("®", "").trim()}`}
-    >
-      <div
-        className={`relative h-full w-full transition-transform duration-500 transform-3d ${
-          flipped ? "transform-[rotateY(180deg)]" : ""
-        }`}
+    <article className="perspective-[1000px] relative h-52 w-full cursor-pointer sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+      <button
+        type="button"
+        aria-expanded={flipped}
+        aria-label={`${flipped ? "Ocultar" : "Ver"} información de ${title.replace("®", "").trim()}`}
+        onClick={() => setFlipped((value) => !value)}
+        className="block h-full w-full cursor-pointer rounded-2xl border-0 bg-transparent p-0 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-petroleum"
       >
-        {/* Front */}
         <div
-          className={`backface-hidden absolute inset-0 flex flex-col items-center justify-center rounded-2xl ${color} p-6 shadow-sm`}
+          className={`relative h-full w-full transition-transform duration-500 transform-3d ${
+            flipped ? "transform-[rotateY(180deg)]" : ""
+          }`}
         >
-          {image && (
-            <img
-              src={image}
-              alt={title}
-              className="mb-3 h-16 w-16 object-contain"
-            />
-          )}
-          <h3 className="text-center text-xl font-bold text-white">
-            {title.replace("®", "").trim()}
-            {title.includes("®") && <sup className="text-[0.65em]">®</sup>}
-          </h3>
-          <span className="mt-3 flex items-center gap-1 text-xs font-medium text-white/70">
-            Ver más
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-3 w-3"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
+          {/* Front */}
+          <div
+            className={`backface-hidden absolute inset-0 flex flex-col items-center justify-center rounded-2xl ${color} p-6 shadow-sm`}
+          >
+            {image && (
+              <img
+                src={image}
+                alt={title}
+                className="mb-3 h-16 w-16 object-contain"
               />
-            </svg>
-          </span>
+            )}
+            <h3 className="text-center text-xl font-bold text-white">
+              {title.replace("®", "").trim()}
+              {title.includes("®") && <sup className="text-[0.65em]">®</sup>}
+            </h3>
+            <span className="mt-3 flex items-center gap-1 text-xs font-medium text-white/70">
+              Ver más
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-3 w-3"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </span>
+          </div>
+          {/* Back */}
+          <div className="backface-hidden absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-ivory p-6 shadow-lg transform-[rotateY(180deg)]">
+            <h3 className="mb-3 text-center text-xl font-bold text-petroleum">
+              {title.replace("®", "").trim()}
+              {title.includes("®") && <sup className="text-[0.65em]">®</sup>}
+            </h3>
+            <p className="text-center text-sm leading-relaxed text-taupe-light">
+              {description}
+            </p>
+          </div>
         </div>
-        {/* Back */}
-        <div className="backface-hidden absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-ivory p-6 shadow-lg transform-[rotateY(180deg)]">
-          <h3 className="mb-3 text-center text-xl font-bold text-petroleum">
-            {title.replace("®", "").trim()}
-            {title.includes("®") && <sup className="text-[0.65em]">®</sup>}
-          </h3>
-          <p className="text-center text-sm leading-relaxed text-taupe-light">
-            {description}
-          </p>
-          {hasPublishedTreatment && (
+      </button>
+      {resolvedTreatments.length > 0 && (
+        <div
+          className={`absolute inset-x-6 bottom-5 flex flex-wrap justify-center gap-2 transition-opacity ${
+            flipped ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+        >
+          {resolvedTreatments.map((treatment) => (
             <Link
-              href={`/${treatmentSlug}`}
+              key={treatment.slug}
+              href={`/${treatment.slug}`}
+              tabIndex={flipped ? 0 : -1}
               onClick={(event) => event.stopPropagation()}
-              className="mt-4 rounded-full bg-champagne px-4 py-2 text-xs font-semibold text-white underline-offset-4 hover:bg-champagne-dark hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-petroleum"
+              className="rounded-full bg-champagne px-3 py-1.5 text-xs font-semibold text-white underline-offset-4 hover:bg-champagne-dark hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-petroleum"
             >
-              Conocer tratamiento
+              {treatmentLinkLabels[treatment.slug]}
             </Link>
-          )}
+          ))}
         </div>
-      </div>
-    </div>
+      )}
+    </article>
   );
 }

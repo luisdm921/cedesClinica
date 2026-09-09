@@ -10,7 +10,7 @@ Analiza el documento o texto que te proporcionaré y crea una nueva página de t
 
 1. Lee `docs/content-pages.md`.
 2. Revisa `src/content/treatments/types.ts`, `catalog.ts` y `planned.ts`.
-3. Confirma que el tratamiento pertenece a la lista planificada y utiliza exactamente su slug.
+3. Confirma que el tratamiento pertenece a la lista planificada y utiliza exactamente su `TreatmentSlug`.
 4. Revisa los componentes actuales para conservar el tono visual del sitio.
 
 ## Implementación
@@ -20,6 +20,9 @@ Analiza el documento o texto que te proporcionaré y crea una nueva página de t
 - Exporta un objeto que satisfaga `TreatmentContent`.
 - Registra el objeto en `src/content/treatments/catalog.ts`.
 - Déjalo con `status: "draft"` hasta que el usuario confirme la revisión editorial.
+- No dupliques el estado editorial en otras configuraciones: `publishedTreatments` es la fuente de verdad para rutas, sitemap y enlaces visibles.
+- Si existe una correspondencia clara con un card de servicios, agrega su slug exacto a `treatmentSlugs` en `src/app/components/services/SlideSwitch.tsx`; no inventes relaciones ni URLs. Los tratamientos en `draft` quedarán sin enlace visible automáticamente.
+- Si no existe una correspondencia clara con un card, déjalo sin `treatmentSlugs`.
 - Si todavía no existe `src/app/(tratamientos)/[slug]/page.tsx`, no lo crees mientras el contenido siga en `draft`.
 - Al publicar el primer tratamiento, copia sin alterar `src/templates/treatment-route-page.tsx.template` a `src/app/(tratamientos)/[slug]/page.tsx`.
 - No modifiques otros tratamientos.
@@ -63,7 +66,8 @@ Cuando la fuente sea un PDF con imágenes autorizadas:
 2. Ejecuta `npm run build`.
 3. Confirma que el tratamiento en estado `draft` no aparece dentro de `out/`.
 4. Confirma que las imágenes extraídas existen en `public/images/tratamientos/<slug>/` y que las rutas registradas en `cases` coinciden con archivos reales.
-5. Cuando el usuario apruebe el contenido, usa el prompt de publicación general para cambiar el estado a `published`, activar la ruta dinámica si es el primer tratamiento, repetir el build y confirmar la salida equivalente generada por Next.js.
+5. Confirma que cualquier relación declarada en `treatmentSlugs` no muestra enlaces mientras el tratamiento siga en `draft`.
+6. Cuando el usuario apruebe el contenido, usa el prompt de publicación general para cambiar el estado a `published`, activar la ruta dinámica si es el primer tratamiento, repetir el build y confirmar la salida equivalente generada por Next.js.
 
 Al finalizar, informa:
 

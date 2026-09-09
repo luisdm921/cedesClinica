@@ -26,4 +26,4 @@ export const plannedTreatments = [
   },
 ] as const;
 
-export type PlannedTreatmentSlug = (typeof plannedTreatments)[number]["slug"];
+export type TreatmentSlug = (typeof plannedTreatments)[number]["slug"];

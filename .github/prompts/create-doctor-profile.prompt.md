@@ -13,6 +13,8 @@ Utiliza el contenido proporcionado para preparar la página individual de la Dra
 5. Crea `src/app/dra-consuelo-chapa-garza/page.tsx` únicamente cuando el contenido esté revisado y su estado sea `published`.
 6. Reutiliza `DoctorProfilePage`; no construyas un diseño independiente.
 7. Agrega metadata, canonical y datos estructurados respaldados por el contenido visible.
-8. Ejecuta `npm run lint` y `npm run build`.
+8. No agregues el perfil al catálogo de tratamientos, a `planned.ts`, a `TreatmentSlug` ni a `treatmentSlugs`: una persona no es un tratamiento.
+9. Cuando la ruta del perfil esté publicada, enlázala desde el card correspondiente de `Nuestro Equipo`, no desde los cards de servicios.
+10. Ejecuta `npm run lint` y `npm run build`.
 
 Al finalizar, resume qué utilizaste, qué adaptaste, qué omitiste y qué requiere validación humana.
