@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
+import { publishedTreatments } from "@/content/treatments/catalog";
 
 const tabs = [
   "Especialidades Dentales",
@@ -166,6 +168,7 @@ export default function SlideSwitch() {
               icon="🩺"
               image="/images/services/endodoncia.webp"
               color="bg-sage-dark"
+              treatmentSlug="endodoncia"
             />
             <ServiceCard
               title="Ortodoncia"
@@ -173,6 +176,7 @@ export default function SlideSwitch() {
               icon="😁"
               image="/images/services/ortodoncia.webp"
               color="bg-sage-dark"
+              treatmentSlug="ortodoncia"
             />
             <ServiceCard
               title="Implantes Dentales"
@@ -180,6 +184,7 @@ export default function SlideSwitch() {
               icon="🔩"
               image="/images/services/implantes.webp"
               color="bg-sage-dark"
+              treatmentSlug="implantes-dentales"
             />
             <ServiceCard
               title="Prótesis Dentales"
@@ -201,6 +206,7 @@ export default function SlideSwitch() {
               icon="👶"
               image="/images/services/odontopediatria.webp"
               color="bg-sage-dark"
+              treatmentSlug="odontopediatria"
             />
             <ServiceCard
               title="Cirugía Oral"
@@ -208,6 +214,7 @@ export default function SlideSwitch() {
               icon="🏥"
               image="/images/services/cirugia.webp"
               color="bg-sage-dark"
+              treatmentSlug="cirugia-terceros-molares"
             />
           </div>
         )}
@@ -220,6 +227,7 @@ export default function SlideSwitch() {
               icon=""
               image="/images/services/acido.webp"
               color="bg-sage-dark"
+              treatmentSlug="acido-hialuronico-facial"
             />
             <ServiceCard
               title="Toxina Botulínica (Botox)"
@@ -227,6 +235,7 @@ export default function SlideSwitch() {
               icon=""
               image="/images/services/botox.webp"
               color="bg-sage-dark"
+              treatmentSlug="toxina-botulinica-facial"
             />
             <ServiceCard
               title="Bioestimuladores de Colágeno"
@@ -295,19 +304,33 @@ function ServiceCard({
   icon,
   image,
   color = "bg-champagne",
+  treatmentSlug,
 }: {
   title: string;
   description: string;
   icon: string;
   image?: string;
   color?: string;
+  treatmentSlug?: string;
 }) {
   const [flipped, setFlipped] = useState(false);
+  const hasPublishedTreatment = treatmentSlug
+    ? publishedTreatments.some((treatment) => treatment.slug === treatmentSlug)
+    : false;
 
   return (
     <div
       className="perspective-[1000px] h-52 w-full cursor-pointer sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
       onClick={() => setFlipped(!flipped)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setFlipped((value) => !value);
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={`${flipped ? "Ocultar" : "Ver"} información de ${title.replace("®", "").trim()}`}
     >
       <div
         className={`relative h-full w-full transition-transform duration-500 transform-3d ${
@@ -356,6 +379,15 @@ function ServiceCard({
           <p className="text-center text-sm leading-relaxed text-taupe-light">
             {description}
           </p>
+          {hasPublishedTreatment && (
+            <Link
+              href={`/${treatmentSlug}`}
+              onClick={(event) => event.stopPropagation()}
+              className="mt-4 rounded-full bg-champagne px-4 py-2 text-xs font-semibold text-white underline-offset-4 hover:bg-champagne-dark hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-petroleum"
+            >
+              Conocer tratamiento
+            </Link>
+          )}
         </div>
       </div>
     </div>

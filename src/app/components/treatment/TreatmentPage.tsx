@@ -10,6 +10,18 @@ type TreatmentPageProps = {
 
 export default function TreatmentPage({ treatment }: TreatmentPageProps) {
   const whatsappUrl = getWhatsAppUrl(treatment.whatsappMessage);
+  const imageSectionTitle =
+    treatment.slug === "odontopediatria"
+      ? "Atención dental infantil en CEDES"
+      : `Conoce la atención de ${treatment.name.toLocaleLowerCase("es-MX")} en CEDES`;
+  const descriptionHeading =
+    treatment.slug === "endodoncia"
+      ? "¿Qué es la endodoncia?"
+      : treatment.slug === "invisalign"
+        ? "¿Qué es Invisalign?"
+        : treatment.slug === "resinas-carillas-dentales"
+          ? "¿Qué son las resinas estéticas y las carillas dentales?"
+          : `¿Qué es ${treatment.name.toLocaleLowerCase("es-MX")}?`;
   const relatedTreatments = (treatment.relatedTreatmentSlugs ?? [])
     .map(getTreatment)
     .filter((item): item is TreatmentContent => Boolean(item));
@@ -50,8 +62,7 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
         <section className="bg-white px-6 py-16 md:px-12 lg:px-24">
           <div className="mx-auto min-w-0 max-w-6xl">
             <h2 className="mb-10 text-center text-[clamp(2.2rem,4vw,3.5rem)] font-semibold text-petroleum">
-              Conoce la atención de {treatment.name.toLocaleLowerCase("es-MX")}{" "}
-              en CEDES
+              {imageSectionTitle}
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
               {treatment.images.map((image) => (
@@ -83,7 +94,7 @@ export default function TreatmentPage({ treatment }: TreatmentPageProps) {
               Conoce el tratamiento
             </p>
             <h2 className="mb-7 text-[clamp(2.2rem,4vw,3.5rem)] font-semibold text-petroleum">
-              ¿Qué es {treatment.name.toLocaleLowerCase("es-MX")}?
+              {descriptionHeading}
             </h2>
             <div className="space-y-5 text-base leading-8 text-taupe-light md:text-lg">
               {treatment.description.map((paragraph) => (

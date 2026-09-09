@@ -6,9 +6,9 @@ const ortodoncia: TreatmentContent = {
     category: "ortodoncia",
     name: "Ortodoncia",
     seo: {
-        title: "Ortodoncia en Monterrey | Brackets y tratamiento personalizado | CEDES",
+        title: "Ortodoncia en Monterrey | Tratamiento personalizado | CEDES",
         description:
-            "Tratamiento de ortodoncia en Monterrey para mejorar la posición de los dientes y la mordida. Conoce las alternativas y el seguimiento personalizado en CEDES Clínica.",
+            "Tratamiento de ortodoncia en Monterrey para mejorar la posición de los dientes y la mordida. Seguimiento personalizado en CEDES Clínica.",
     },
     hero: {
         eyebrow: "Ortodoncia en Monterrey",
