@@ -1,3 +1,5 @@
+import type { TreatmentSlug } from "./planned";
+
 export type TreatmentCategory =
   | "odontologia"
   | "ortodoncia"
@@ -25,7 +27,7 @@ export type TreatmentStep = {
 };
 
 export type TreatmentContent = {
-  slug: string;
+  slug: TreatmentSlug;
   status: "draft" | "published";
   category: TreatmentCategory;
   name: string;

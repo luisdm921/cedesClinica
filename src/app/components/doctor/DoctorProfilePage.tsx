@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import CertificatesCarousel from "@/app/components/doctor/CertificatesCarousel";
 import { getTreatment } from "@/content/treatments/catalog";
 import type { DoctorProfileContent } from "@/content/doctor/types";
 import type { TreatmentContent } from "@/content/treatments/types";
@@ -37,19 +38,32 @@ export default function DoctorProfilePage({ profile }: DoctorProfilePageProps) {
               {profile.hero.name}
             </h1>
             <p className="mt-5 text-lg text-champagne-light">
-              {profile.hero.specialties.join(" · ")}
+              {profile.hero.specialties.join(" | ")}
             </p>
             <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ivory/85">
               {profile.hero.summary}
             </p>
-            <a
-              href={getWhatsAppUrl(profile.whatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-9 inline-flex w-fit rounded-full bg-champagne px-7 py-3.5 font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-champagne-dark"
-            >
-              Agendar valoración
-            </a>
+            <div className="mt-9 flex flex-wrap gap-4">
+              <a
+                href={getWhatsAppUrl(profile.whatsappMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit rounded-full bg-champagne px-7 py-3.5 font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-champagne-dark"
+              >
+                Agendar valoración
+              </a>
+              {profile.externalProfiles.map((externalProfile) => (
+                <a
+                  className="inline-flex w-fit items-center rounded-full border border-champagne/70 px-7 py-3.5 font-semibold text-champagne-light transition-colors hover:bg-white/10"
+                  href={externalProfile.url}
+                  key={externalProfile.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {externalProfile.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -72,7 +86,10 @@ export default function DoctorProfilePage({ profile }: DoctorProfilePageProps) {
             </h2>
             <ul className="space-y-4">
               {profile.education.map((item) => (
-                <li className="flex gap-3 leading-relaxed text-taupe-light" key={item}>
+                <li
+                  className="flex gap-3 leading-relaxed text-taupe-light"
+                  key={item}
+                >
                   <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-champagne" />
                   {item}
                 </li>
@@ -81,6 +98,8 @@ export default function DoctorProfilePage({ profile }: DoctorProfilePageProps) {
           </aside>
         </div>
       </section>
+
+      <CertificatesCarousel />
 
       <section className="bg-white px-6 py-20 md:px-12 lg:px-24">
         <div className="mx-auto max-w-5xl text-center">
@@ -92,6 +111,17 @@ export default function DoctorProfilePage({ profile }: DoctorProfilePageProps) {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 md:px-12 lg:px-24">
+        <div className="mx-auto max-w-5xl text-center">
+          <h2 className="text-3xl font-semibold text-petroleum">
+            Consulta en {profile.location.name}
+          </h2>
+          <address className="mt-4 not-italic text-lg leading-8 text-taupe-light">
+            {profile.location.address}
+          </address>
         </div>
       </section>
 

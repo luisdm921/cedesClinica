@@ -14,6 +14,14 @@ export type DoctorProfileContent = {
       alt: string;
     };
   };
+  location: {
+    name: string;
+    address: string;
+  };
+  externalProfiles: {
+    label: string;
+    url: string;
+  }[];
   biography: string[];
   education: string[];
   approach: string[];

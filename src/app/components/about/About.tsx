@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function About() {
   return (
     <section
@@ -135,52 +137,53 @@ export default function About() {
           </div>
 
           {/* Dra. Consuelo Chapa — Card Principal */}
-          {/* El perfil se enlazará desde este card cuando se publique la plantilla profesional. */}
-          <div className="mb-12">
-            <div className="group flex flex-col items-center md:flex-row md:items-start md:text-left gap-8 rounded-3xl bg-white/60 p-8 shadow-lg ring-1 ring-champagne/40 w-full">
-              <div className="shrink-0 h-64 w-64 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
-                <img
-                  src="/images/team/Dra. Consuelo Chapa.webp"
-                  alt="Dra. Consuelo Chapa"
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
-              <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                <span className="mb-2 inline-block rounded-full bg-petroleum/10 px-3 py-0.5 text-xs font-semibold uppercase tracking-wider text-petroleum">
-                  Directora &amp; Fundadora
-                </span>
-                <h4 className="text-xl font-bold text-petroleum">
-                  Dra. Consuelo Chapa
-                </h4>
-                <p className="mt-1 text-sm font-medium text-sage-dark">
-                  Implantología Oral | Cirugía Bucal | Armonización Orofacial
+          <Link
+            aria-label="Ver el perfil profesional de la Dra. Consuelo Chapa Garza"
+            className="group mb-12 flex w-full flex-col items-center gap-8 rounded-3xl bg-white/60 p-8 shadow-lg ring-1 ring-champagne/40 transition-shadow hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-petroleum md:flex-row md:items-start md:text-left"
+            href="/dra-consuelo-chapa-garza"
+          >
+            <div className="shrink-0 h-64 w-64 overflow-hidden rounded-2xl border-2 border-champagne/50 shadow-md transition-transform duration-300 group-hover:scale-[1.02]">
+              <img
+                src="/images/team/Dra. Consuelo Chapa.webp"
+                alt="Dra. Consuelo Chapa"
+                className="h-full w-full object-cover object-top"
+              />
+            </div>
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <span className="mb-2 inline-block rounded-full bg-petroleum/10 px-3 py-0.5 text-xs font-semibold uppercase tracking-wider text-petroleum">
+                Directora &amp; Fundadora
+              </span>
+              <h4 className="text-xl font-bold text-petroleum">
+                Dra. Consuelo Chapa
+              </h4>
+              <p className="mt-1 text-sm font-medium text-sage-dark">
+                Implantología Oral | Cirugía Bucal | Armonización Orofacial
+              </p>
+              <div className="mt-4 text-sm leading-relaxed text-taupe-light">
+                <p>
+                  Más de 34 años de experiencia. Directora y Fundadora de CEDES
+                  Clínica.
                 </p>
-                <div className="mt-4 text-sm leading-relaxed text-taupe-light">
-                  <p>
-                    Más de 34 años de experiencia. Directora y Fundadora de
-                    CEDES Clínica.
-                  </p>
-                  <p className="mt-2">
-                    Formación avanzada: Implantología, Cirugía Bucal,
-                    Periodoncia, Endodoncia y ATM.
-                  </p>
-                  <p className="mt-2">
-                    Especialización internacional: Estética Facial (México) y
-                    Armonización Orofacial (Brasil).
-                  </p>
-                  <p className="mt-2">
-                    Tratamiento de Bruxismo y ATM. Creadora del protocolo
-                    exclusivo RELAX 360<sup className="text-[0.65em]">®</sup>:
-                  </p>
-                  <ul className="mt-1 list-disc list-inside">
-                    <li>Guarda oclusal personalizada.</li>
-                    <li>Toxina botulínica terapéutica en maseteros.</li>
-                    <li>Auriculoterapia antiestrés.</li>
-                  </ul>
-                </div>
+                <p className="mt-2">
+                  Formación avanzada: Implantología, Cirugía Bucal, Periodoncia,
+                  Endodoncia y ATM.
+                </p>
+                <p className="mt-2">
+                  Especialización internacional: Estética Facial (México) y
+                  Armonización Orofacial (Brasil).
+                </p>
+                <p className="mt-2">
+                  Tratamiento de Bruxismo y ATM. Creadora del protocolo
+                  exclusivo RELAX 360<sup className="text-[0.65em]">®</sup>:
+                </p>
+                <ul className="mt-1 list-disc list-inside">
+                  <li>Guarda oclusal personalizada.</li>
+                  <li>Toxina botulínica terapéutica en maseteros.</li>
+                  <li>Auriculoterapia antiestrés.</li>
+                </ul>
               </div>
             </div>
-          </div>
+          </Link>
 
           <div className="grid gap-8 md:grid-cols-3">
             {/* Dr. Gilberto Zamarrón */}

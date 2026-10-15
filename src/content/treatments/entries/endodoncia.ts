@@ -64,7 +64,8 @@ const endodoncia: TreatmentContent = {
         "Puede ser necesaria cuando la pulpa dental está inflamada o infectada, generalmente por una caries profunda, un traumatismo, una fractura o procedimientos dentales previos. La valoración determina si el diente realmente requiere tratamiento de conductos.",
     },
     {
-      question: "¿Cuáles son los síntomas de que puedo necesitar una endodoncia?",
+      question:
+        "¿Cuáles son los síntomas de que puedo necesitar una endodoncia?",
       answer:
         "Algunos signos pueden incluir dolor intenso o persistente, sensibilidad prolongada al frío o calor, dolor al morder, inflamación, una fístula o cambio de coloración del diente. En algunos casos puede requerirse endodoncia sin presentar síntomas, por lo que la valoración es importante.",
     },
@@ -114,12 +115,14 @@ const endodoncia: TreatmentContent = {
         "No todos los dientes requieren el mismo tipo de restauración. La necesidad de una corona u otra alternativa depende de la cantidad de estructura dental, la ubicación de la pieza y las fuerzas que recibe. El especialista determinará la opción adecuada.",
     },
     {
-      question: "¿Puedo hacerme una endodoncia si tengo inflamación o un absceso?",
+      question:
+        "¿Puedo hacerme una endodoncia si tengo inflamación o un absceso?",
       answer:
         "En muchos casos, sí. La presencia de inflamación o un absceso no significa automáticamente que el diente deba extraerse. El especialista evaluará el origen y las condiciones de la pieza para determinar el tratamiento indicado.",
     },
     {
-      question: "¿Qué pasa si no me realizo la endodoncia y dejo pasar el tiempo?",
+      question:
+        "¿Qué pasa si no me realizo la endodoncia y dejo pasar el tiempo?",
       answer:
         "Si existe una infección o daño irreversible de la pulpa, el problema puede avanzar y provocar dolor, inflamación o afectar los tejidos que rodean al diente. Es importante atender oportunamente los síntomas y seguir las recomendaciones del especialista.",
     },

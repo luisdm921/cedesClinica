@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { createContext, useContext, useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { publishedTreatments } from "@/content/treatments/catalog";
 import type { TreatmentSlug } from "@/content/treatments/planned";
 
 const tabs = [
@@ -11,8 +10,13 @@ const tabs = [
   "Medicina Estética y Bienestar",
 ] as const;
 type Tab = (typeof tabs)[number];
+const PublishedTreatmentSlugsContext = createContext<TreatmentSlug[]>([]);
 
-export default function SlideSwitch() {
+export default function SlideSwitch({
+  publishedTreatmentSlugs,
+}: {
+  publishedTreatmentSlugs: TreatmentSlug[];
+}) {
   const [active, setActive] = useState<Tab>("Armonización Orofacial");
   const containerRef = useRef<HTMLDivElement>(null);
   const mobileRef = useRef<HTMLDivElement>(null);
@@ -153,6 +157,7 @@ export default function SlideSwitch() {
       </div>
 
       {/* Content */}
+      <PublishedTreatmentSlugsContext.Provider value={publishedTreatmentSlugs}>
       <div className="mx-auto max-w-5xl">
         {active === "Especialidades Dentales" && (
           <div className="animate-fade-in flex flex-wrap justify-center gap-6">
@@ -298,6 +303,7 @@ export default function SlideSwitch() {
           </div>
         )}
       </div>
+      </PublishedTreatmentSlugsContext.Provider>
     </section>
   );
 }
@@ -318,12 +324,9 @@ function ServiceCard({
   treatmentSlugs?: TreatmentSlug[];
 }) {
   const [flipped, setFlipped] = useState(false);
+  const publishedTreatmentSlugs = useContext(PublishedTreatmentSlugsContext);
   const resolvedTreatments = (treatmentSlugs ?? []).flatMap((slug) => {
-    const treatment = publishedTreatments.find(
-      (candidate) => candidate.slug === slug,
-    );
-
-    return treatment ? [{ slug }] : [];
+    return publishedTreatmentSlugs.includes(slug) ? [{ slug }] : [];
   });
 
   const treatmentLinkLabels: Record<TreatmentSlug, string> = {
